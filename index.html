@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Kỷ Niệm Lớp Học - Hành trình đáng nhớ</title>
     
     <!-- Fonts & Icons -->
@@ -14,10 +15,78 @@
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
     <script src="javascript.js" defer></script>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lexend:wght@700;900&display=swap" rel="stylesheet"> 
+    <!-- Thêm vào phần head của final.html -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script> 
+
 </head>
 <body>
+    <!-- LOADING SCREEN - VINYL RECORD THEME -->
+<div class="loading-screen" id="loadingScreen">
+    <div class="loader-container">
+        <!-- Vinyl record -->
+        <div class="vinyl-record">
+            <!-- Vinyl grooves -->
+            <div class="groove-1"></div>
+            <div class="groove-2"></div>
+            <div class="groove-3"></div>
+            
+            <!-- Center label with image -->
+            <div class="record-label">
+                <img src="lop10/anh/logo.jpg" alt="10A2 Logo" class="record-image" 
+                     onerror="this.style.display='none'; this.parentElement.classList.add('fallback'); this.parentElement.innerHTML='<span>10A2</span>';">
+            </div>
+        </div>
+        
+        <!-- Tonearm -->
+        <div class="tonearm">
+            <div class="tonearm-tip"></div>
+            <div class="tonearm-base"></div>
+        </div>
+        
+        <!-- Text circle - "Back to 2023-2024 with Oizoicon" chạy theo viền đĩa -->
+        <div class="text-circle">
+            <span id="rotatingText"></span>
+        </div>
+        
+        <!-- Floating music notes -->
+        <div class="music-notes-wrapper">
+            <div class="note-animation">♪</div>
+            <div class="note-animation">♫</div>
+            <div class="note-animation">♬</div>
+            <div class="note-animation">♩</div>
+            <div class="note-animation">♪</div>
+            <div class="note-animation">♫</div>
+        </div>
+        
+        <!-- Loading progress -->
+        <div class="loading-progress">
+            <span id="loadingPercent">0</span>%
+        </div>
+        
+        <!-- Loading bar -->
+        <div class="loading-bar">
+            <div class="loading-bar-fill" id="loadingBarFill"></div>
+        </div>
+    </div>
+</div>
+       <!-- HEADER -->
+    <header class="site-header">
+        <a href="#" class="header-logo">
+            <img src="lop10/anh/logo.png" alt="Logo 12A2" class="header-logo-img" onerror="this.style.display='none'; this.parentElement.innerHTML='12A2<span>K28</span>';">
+        </a>
+        <nav class="main-nav">
+            <a href="#" class="nav-link active">Lớp 10</a>
+            <a href="#" class="nav-link">Lớp 11</a>
+            <a href="#" class="nav-link">Lớp 12</a>
+            <a href="#" class="nav-link">Thành Viên</a>
+            <a href="#" class="nav-link">Giáo Viên</a>
+        </nav> 
+    </header>
     <!-- PHẦN 1: FULL ẢNH -->
-    <div class="fullscreen-image-container">
+    <div class="fullscreen-image-container" id="fullscreen-image-container">
         <img src="lop10/anh/khaigiang.png" alt="Khai giảng" class="fullscreen-image" id="main-image">
         
         <div class="image-controls">
@@ -37,7 +106,7 @@
     </div>
 
     <!-- PHẦN 2: QUOTE -->
-    <section class="quote-section">
+    <section class="quote-section" id="quote-section">
         <div class="quote-container">
             <div class="star-decoration star-top"></div>
             <div class="star-decoration star-bottom"></div>
@@ -68,7 +137,7 @@
     </section>
 
     <!-- PHẦN 3: POLAROID SECTION -->
-    <section class="polaroid-section">
+    <section class="polaroid-section" id="polaroid-section">
         <div class="corner-images-container">
             <div class="corner-image top-left">
                 <img src="lop10/anh/phunu1.jpeg" 
@@ -87,14 +156,14 @@
             
             <div class="corner-image bottom-left polaroid-frame">
                 <div class="polaroid-inner">
-                    <div class="polaroid-image-area">
+                    
                         <img src="lop10/anh/phunu3.png" 
                              alt="Polaroid" class="polaroid-img">
-                    </div>
-                    <div class="polaroid-caption">
-                        <p>Khoảnh khắc đáng nhớ</p>
-                    </div>
                 </div>
+                    <div class="polaroid-caption">
+                        <p>Bánh kem đầu tiên </p>
+                    </div>
+            </div>
                 <div class="polaroid-tape"></div>
             </div>
             
@@ -105,7 +174,7 @@
                              alt="Polaroid nhỏ" class="mini-img">
                     </div>
                     <div class="mini-caption">
-                        <p>Kỷ niệm</p>
+                        <p>Kẹo nè</p>
                     </div>
                 </div>
                 <div class="mini-tape"></div>
@@ -145,7 +214,7 @@
     </section>
 
     <!-- PHẦN 4: JOURNAL WRAPPER 2010 -->
-    <section class="journal-wrapper">
+    <section class="journal-wrapper" id="journal-wrapper"> 
         <div class="journal-container-2010">
             <div class="journal-main-section">
                 <div class="j-image-large-wrapper scroll-reveal">
@@ -193,7 +262,7 @@
     </section>
 
     <!-- PHẦN 5: JOURNAL SECTION 20/11 -->
-    <section class="journal-section">
+    <section class="journal-section" id="journal-section">
         <div class="journal-container fade-in-up">
             <div class="journal-header">
                 <h2 class="journal-title">Dịp lễ 20/11 năm ấy là một trong những dấu mốc đáng nhớ đầu tiên của tập thể lớp 10A2</h2>
@@ -321,11 +390,6 @@
             </div>
         </div>
     </section>
-
-
-    
-
-    
 
 <!-- PHẦN 9: THANH LỊCH - CẬP ĐỔI NAM THÀNH NỮ TỪ ĐẦU TIÊN CỦA LỚP -->
 <section class="thanhlich-section" id="thanhlich-section" style="display: block; visibility: visible; opacity: 1; min-height: 100vh;">
@@ -472,8 +536,6 @@
         </div>
     </div>
 </section>
-
-
 
 <!-- PHẦN 12: CHUYẾN ĐI TRẢI NGHIỆM YAKULT & AEON MALL -->
 <section class="traidinh-section" id="traidinh-section">
@@ -706,18 +768,18 @@
         <img src="lop10/anh/ct5.png" alt="Kỷ niệm 5">
         <img src="lop10/anh/ct6.png" alt="Kỷ niệm 6">
     </div>
-</section>
+
     <!-- Modal Popup -->
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal-content">
-            <button class="modal-close" id="modalClose">✕</button>
-            <img class="modal-image" id="modalImage" src="" alt="">
-            <div class="modal-info">
-                <h3 class="modal-title" id="modalTitle"></h3>
-                <p class="modal-description" id="modalDescription"></p>
-            </div>
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+        <button class="modal-close" id="modalClose">✕</button>
+        <img class="modal-image" id="modalImage" src="" alt="">
+        <div class="modal-info">
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <p class="modal-description" id="modalDescription"></p>
         </div>
     </div>
+</div>
 
 
 <!-- PHẦN 16: KỶ NIỆM 8/3 & LỄ HỘI VĂN HÓA -->
@@ -805,7 +867,7 @@
                 <div class="cultural-right-column">
                     <div class="cultural-booth booth-china">
                         <div class="booth-header">
-                            <span class="booth-flag">🇨🇳</span>
+
                             <h3 class="booth-title">Gian hàng Trung Quốc</h3>
                         </div>
                         <div class="booth-image-duo">
@@ -1199,7 +1261,7 @@
 </section>
 
 <!-- PHẦN 20: EXTENDED COLLAGE GRID - -->
-<section class="final-memory-strip-section">
+<section class="final-memory-strip-section" id="final-memory-strip-section">
     <div class="collage-header">
         <h2 class="collage-title">NHÌN LẠI NĂM LỚP 10 NHÉ</h2>
     </div>
@@ -1213,3 +1275,254 @@
         <img src="lop10/anh/end6.png" alt="Kỷ niệm 6">
     </div>
 </section>
+<!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>VỀ CHÚNG TÔI</h3>
+                <p class="footer-desc">
+                    12A2 K28 - Nơi lưu giữ những kỷ niệm đẹp nhất của tuổi học trò. Hành trình 3 năm với biết bao niềm vui và kỷ niệm.
+                </p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>LIÊN KẾT NHANH</h3>
+                <ul class="footer-links">
+                    <li><a href="#fullscreen-image-container">Lớp 10</a></li>
+                    <li><a href="#">Lớp 11</a></li>
+                    <li><a href="#">Lớp 12</a></li>
+                    <li><a href="#">Thành Viên</a></li>
+                    <li><a href="#">Giáo Viên</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>LIÊN HỆ</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook: 12A2 - K28</a></li>
+                </ul>
+                <div style="margin-top: 15px;">
+                    <h4 style="color: white; margin: 0 0 5px 0; font-size: 14px; font-weight: 600;">Góp ý cho lớp:</h4>
+                    <textarea class="feedback-box" rows="3" placeholder="Nhập lời nhắn..."></textarea>
+                    <button class="feedback-btn">Gửi</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 - 2026 12A2 K28. All rights reserved. Made with love 💛
+        </div>
+    </footer>
+
+
+
+    <!-- Right Side Navigation Bar với mô tả chi tiết -->
+<div class="right-nav-bar">
+    <!-- Phần trăm cuộn -->
+    <div class="nav-progress" id="scrollProgress">0%</div>
+    
+    <!-- Navigation Items với mô tả -->
+    <div class="nav-item" data-section="fullscreen-image-container">
+        <i class="fas fa-home nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Đầu trang</span>
+            <span class="nav-desc">Lễ khai giảng năm học</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="quote-section">
+        <i class="fas fa-quote-right nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Slogan lớp</span>
+            <span class="nav-desc">"We are the best..."</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="polaroid-section">
+        <i class="fas fa-camera-retro nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">20/10</span>
+            <span class="nav-desc">Ngày Phụ nữ Việt Nam</span>
+        </div>
+    </div>
+    
+    
+    <div class="nav-item" data-section="journal-section">
+        <i class="fas fa-gift nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">20/11</span>
+            <span class="nav-desc">Ngày Nhà giáo Việt Nam</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="backstage-section">
+        <i class="fas fa-film nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Hậu trường</span>
+            <span class="nav-desc">Tập luyện văn nghệ</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="media-section">
+        <i class="fas fa-music nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Bài ca tôm cá</span>
+            <span class="nav-desc">Tiết mục văn nghệ</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="final-award-section">
+        <i class="fas fa-trophy nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Giải III</span>
+            <span class="nav-desc">Thành tích văn nghệ</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="thanhlich-section">
+        <i class="fas fa-crown nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Thanh lịch</span>
+            <span class="nav-desc">Cặp đôi nam thanh nữ tú</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="hau-truong-section">
+        <i class="fas fa-clock nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Deadline</span>
+            <span class="nav-desc">Hậu trường chạy deadline</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="traidinh-section">
+        <i class="fas fa-bottle-droplet nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Yakult</span>
+            <span class="nav-desc">Tham quan nhà máy</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="memory-section">
+        <i class="fas fa-store nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">AEON Mall</span>
+            <span class="nav-desc">Kỷ niệm đi chơi</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="tet-section">
+        <i class="fas fa-tree nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Cận Tết</span>
+            <span class="nav-desc">Vườn thượng uyển</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="cultural-section">
+        <i class="fas fa-venus-mars nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">8/3 & Văn hóa</span>
+            <span class="nav-desc">Lễ hội văn hóa</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="summary-section">
+        <i class="fas fa-chart-simple nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Tổng kết</span>
+            <span class="nav-desc">Hành trình 3 năm</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="club-section">
+        <i class="fas fa-users nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">CLB</span>
+            <span class="nav-desc">Câu lạc bộ</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="teams-section">
+        <i class="fas fa-futbol nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Đội tuyển</span>
+            <span class="nav-desc">Các đội tuyển</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="final-memory-strip-section">
+        <i class="fas fa-images nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Khoảnh khắc</span>
+            <span class="nav-desc">Nhìn lại năm lớp 10</span>
+        </div>
+    </div>
+    
+    <!-- Scroll to top button với mô tả -->
+    <div class="scroll-top-btn" id="scrollTopBtn">
+        <i class="fas fa-arrow-up"></i>
+        <div class="nav-content">
+            <span class="nav-title">Lên đầu</span>
+            <span class="nav-desc">Quay lại đầu trang</span>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- ENDING NOTIFICATION - VINYL RECORD THEME -->
+<div class="ending-notification" id="endingNotification">
+    <div class="ending-content">
+        <!-- Decorative sparkles -->
+        <div class="ending-sparkle"></div>
+        
+        <!-- Vinyl record container -->
+        <div class="ending-vinyl-container">
+            <!-- Vinyl record -->
+            <div class="ending-record" id="endingRecord">
+                <!-- Vinyl grooves -->
+                <div class="ending-groove-1"></div>
+                <div class="ending-groove-2"></div>
+                <div class="ending-groove-3"></div>
+                
+                <!-- Center label with image -->
+                <div class="ending-label">
+                    <img src="lop10/anh/logo.jpg" alt="10A2 Logo" class="ending-image" 
+                         onerror="this.style.display='none'; this.parentElement.classList.add('fallback'); this.parentElement.innerHTML='<span>10A2</span>';">
+                </div>
+            </div>
+            
+            <!-- Tonearm -->
+            <div class="ending-tonearm" id="endingTonearm">
+                <div class="ending-tonearm-tip"></div>
+                <div class="ending-tonearm-base"></div>
+            </div>
+        </div>
+        
+        <!-- Floating music notes -->
+        <div class="ending-music-notes">
+            <div class="ending-note">♪</div>
+            <div class="ending-note">♫</div>
+            <div class="ending-note">♬</div>
+            <div class="ending-note">♩</div>
+            <div class="ending-note">♪</div>
+            <div class="ending-note">♫</div>
+        </div>
+        
+        <!-- Text container -->
+        <div class="ending-text-container">
+            <div class="ending-text-line1">Đó là năm lớp 10 của</div>
+            <div class="ending-text-line2">OIZOICON đó</div>
+        </div>
+        
+        <!-- Close button -->
+        <button class="ending-close-btn" id="endingCloseBtn">
+            <i class="fas fa-rotate-left" style="margin-right: 10px;"></i>
+            Nghe lại kỷ niệm
+        </button>
+    </div>
+</div>
+
+
+
+</body>
+</html>

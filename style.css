@@ -652,7 +652,7 @@ h1, h2, h3, h4, h5, h6,
         }
 
         .bottom-left {
-            bottom: 40px;
+            bottom: -450px;
             left: 40px;
             width: 220px;
             height: 220px;
@@ -8105,14 +8105,14 @@ img {
 }
 
 
-/* ===== LOADING SCREEN ===== */
+/* ===== LOADING SCREEN - VINYL RECORD THEME ===== */
 .loading-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0a 100%);
     z-index: 99999;
     display: flex;
     justify-content: center;
@@ -8125,58 +8125,167 @@ img {
     visibility: hidden;
 }
 
-/* Container cho vòng tròn */
 .loader-container {
     position: relative;
-    width: 300px;
-    height: 300px;
+    width: 450px;
+    height: 450px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Vòng tròn chính - nơi chứa ảnh */
-.circle-loader {
-    position: relative;
+/* Vinyl record */
+.vinyl-record {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #444, #111);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 0 6px #ffd700, 0 0 0 12px rgba(255, 215, 0, 0.2);
+    animation: spin 8s linear infinite;
+    z-index: 2;
+    overflow: hidden;
+}
+
+/* Vinyl grooves */
+.vinyl-record::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 215, 0, 0.15);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+}
+
+.vinyl-record::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 215, 0, 0.12);
+}
+
+/* Additional grooves for authentic vinyl look */
+.groove-1, .groove-2, .groove-3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 2px solid rgba(255, 215, 0, 0.1);
+}
+
+.groove-1 {
     width: 200px;
     height: 200px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-    animation: spin 8s linear infinite;
-    overflow: hidden;
-    z-index: 2;
 }
 
-/* Ảnh ở giữa vòng tròn */
-.circle-image {
+.groove-2 {
+    width: 150px;
+    height: 150px;
+    border-width: 3px;
+    border-color: rgba(255, 215, 0, 0.15);
+}
+
+.groove-3 {
+    width: 100px;
+    height: 100px;
+    border-width: 4px;
+    border-color: rgba(255, 215, 0, 0.2);
+}
+
+/* Center label */
+/* Center label with image */
+.record-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+    border: 4px solid #ffd700;
+    overflow: hidden;
+    padding: 5px;
+}
+
+.record-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
     border-radius: 50%;
-    border: 4px solid #fff;
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
 }
 
-/* Vòng tròn chứa text */
+.vinyl-record:hover .record-image {
+    transform: scale(1.05);
+}
+
+/* Fallback nếu ảnh không tải được */
+.record-label.fallback {
+    background: radial-gradient(circle, #ffd700, #b8860b);
+}
+
+.record-label.fallback span {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #1e293b;
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+    letter-spacing: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .record-label {
+        width: 110px;
+        height: 110px;
+    }
+}
+
+.record-label span {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #1e293b;
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+    letter-spacing: 2px;
+}
+
+/* Text circle - chạy theo viền đĩa */
 .text-circle {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    animation: rotateText 10s linear infinite;
-    z-index: 3;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 410px;
+    height: 410px;
+    animation: rotateText 12s linear infinite;
+    z-index: 4;
 }
 
-/* Text chạy theo vòng tròn với hiệu ứng fade in */
 .text-circle span {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 280px;
-    height: 280px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
 }
 
@@ -8184,71 +8293,116 @@ img {
     position: absolute;
     left: 50%;
     top: 0;
-    transform-origin: 0 140px;
-    transform: rotate(calc(18deg * var(--i)));
+    transform-origin: 0 205px;
+    transform: rotate(calc(9deg * var(--i)));
     font-style: normal;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 700;
+    color: #ffd700;
+    font-size: 16px;
+    font-weight: 600;
     font-family: 'Caveat', cursive;
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     
     /* Hiệu ứng fade in */
     opacity: 0;
     animation: fadeInLetter 0.5s ease forwards;
-    animation-delay: calc(0.1s * var(--i));
+    animation-delay: calc(0.05s * var(--i));
 }
 
-/* Khi chữ đã hiển thị xong - giữ nguyên */
+/* Khi chữ đã hiển thị xong */
 .text-circle span i.loaded {
     opacity: 1 !important;
-    color: #ffd700;
+    color: #ffffff;
     text-shadow: 0 0 15px #ffaa00, 0 0 30px #ffd700;
-    transform: rotate(calc(18deg * var(--i))) scale(1.1);
+    transform: rotate(calc(9deg * var(--i))) scale(1.1);
 }
 
-/* Hiệu ứng fade in từng chữ */
-@keyframes fadeInLetter {
-    0% {
-        opacity: 0;
-        transform: rotate(calc(18deg * var(--i))) scale(0.5);
-        color: #ffd700;
-        text-shadow: 0 0 20px #ffd700;
-    }
-    50% {
-        opacity: 0.8;
-        transform: rotate(calc(18deg * var(--i))) scale(1.2);
-        color: #ffffff;
-    }
-    100% {
-        opacity: 1;
-        transform: rotate(calc(18deg * var(--i))) scale(1);
-        color: #ffffff;
-    }
+/* Tonearm */
+.tonearm {
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    width: 200px;
+    height: 12px;
+    background: linear-gradient(to right, #999, #ddd);
+    transform: rotate(-15deg);
+    transform-origin: right center;
+    border-radius: 10px 0 0 10px;
+    box-shadow: -5px 5px 15px rgba(0,0,0,0.5);
+    z-index: 6;
+    animation: tonearmVibrate 2s ease infinite alternate;
 }
+
+.tonearm-tip {
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    background: radial-gradient(circle, #ffd700, #ffaa00);
+    border-radius: 50%;
+    box-shadow: 0 0 20px #ffd700;
+    border: 2px solid white;
+}
+
+.tonearm-base {
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle, #ccc, #888);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border: 2px solid #aaa;
+}
+
+/* Floating music notes */
+.music-notes-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.note-animation {
+    position: absolute;
+    color: #ffd700;
+    font-size: 30px;
+    opacity: 0;
+    filter: drop-shadow(0 0 10px #ffd700);
+    animation: noteFloat 3s ease-in infinite;
+}
+
+.note-animation:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+.note-animation:nth-child(2) { left: 30%; top: 60%; animation-delay: 0.5s; }
+.note-animation:nth-child(3) { left: 60%; top: 30%; animation-delay: 1s; }
+.note-animation:nth-child(4) { left: 80%; top: 70%; animation-delay: 1.5s; }
+.note-animation:nth-child(5) { left: 40%; top: 80%; animation-delay: 2s; }
+.note-animation:nth-child(6) { left: 70%; top: 40%; animation-delay: 2.5s; }
 
 /* Loading progress */
 .loading-progress {
     position: absolute;
-    bottom: -60px;
+    bottom: -70px;
     left: 50%;
     transform: translateX(-50%);
     color: white;
-    font-size: 24px;
-    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
     font-weight: 700;
-    text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
-    white-space: nowrap;
-    animation: pulse 1.5s ease infinite;
+    font-family: 'Montserrat', sans-serif;
+    text-shadow: 0 0 20px #ffd700;
+    z-index: 10;
 }
 
 .loading-progress span {
     color: #ffd700;
-    font-size: 36px;
+    font-size: 42px;
     margin-left: 5px;
-    animation: glowNumber 1s ease infinite;
+    animation: pulseNumber 1.5s ease infinite;
 }
 
 /* Loading bar */
@@ -8257,22 +8411,23 @@ img {
     bottom: -120px;
     left: 50%;
     transform: translateX(-50%);
-    width: 300px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
+    width: 350px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
     overflow: hidden;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    z-index: 10;
 }
 
 .loading-bar-fill {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #ffd700, #ffaa00);
-    border-radius: 10px;
-    transition: width 0.1s linear;
-    box-shadow: 0 0 20px #ffd700;
+    background: linear-gradient(90deg, #ffd700, #ffaa00, #ffd700);
+    background-size: 200% 100%;
+    animation: gradientMove 2s linear infinite;
+    border-radius: 3px;
     position: relative;
-    overflow: hidden;
 }
 
 .loading-bar-fill::after {
@@ -8282,95 +8437,147 @@ img {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
     animation: shimmer 1.5s infinite;
 }
 
 /* Animations */
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 @keyframes rotateText {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(-360deg); }
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(-360deg); }
 }
 
-@keyframes pulse {
-    0%, 100% {
-        opacity: 0.7;
-        transform: translateX(-50%) scale(1);
+@keyframes tonearmVibrate {
+    0% { transform: rotate(-15deg); }
+    100% { transform: rotate(-12deg); }
+}
+
+@keyframes noteFloat {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+        transform: translateY(-20px) rotate(10deg);
+    }
+    80% {
+        opacity: 1;
+        transform: translateY(-80px) rotate(30deg);
+    }
+    100% {
+        transform: translateY(-120px) rotate(50deg);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeInLetter {
+    0% {
+        opacity: 0;
+        transform: rotate(calc(9deg * var(--i))) scale(0.5);
+        color: #ffd700;
+        text-shadow: 0 0 30px #ffd700;
     }
     50% {
+        opacity: 0.8;
+        transform: rotate(calc(9deg * var(--i))) scale(1.2);
+        color: #ffffff;
+    }
+    100% {
         opacity: 1;
-        transform: translateX(-50%) scale(1.05);
+        transform: rotate(calc(9deg * var(--i))) scale(1);
+        color: #ffd700;
     }
 }
 
-@keyframes glowNumber {
-    0%, 100% { text-shadow: 0 0 10px #ffd700; }
-    50% { text-shadow: 0 0 30px #ffaa00, 0 0 50px #ffd700; }
+@keyframes pulseNumber {
+    0%, 100% {
+        transform: scale(1);
+        text-shadow: 0 0 20px #ffd700;
+    }
+    50% {
+        transform: scale(1.2);
+        text-shadow: 0 0 40px #ffaa00;
+    }
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
 }
 
 @keyframes shimmer {
-    100% { left: 200%; }
-}
-
-@keyframes glowPulse {
-    0%, 100% { filter: drop-shadow(0 0 10px #ffd700); }
-    50% { filter: drop-shadow(0 0 30px #ffaa00); }
-}
-
-/* Hiệu ứng đặc biệt cho vòng tròn */
-.circle-loader {
-    animation: spin 8s linear infinite, glowPulse 2s ease infinite;
+    100% {
+        left: 200%;
+    }
 }
 
 /* Responsive */
 @media (max-width: 768px) {
     .loader-container {
-        width: 250px;
-        height: 250px;
+        width: 350px;
+        height: 350px;
     }
     
-    .circle-loader {
-        width: 160px;
-        height: 160px;
+    .vinyl-record {
+        width: 280px;
+        height: 280px;
     }
     
-    .text-circle span {
-        width: 220px;
-        height: 220px;
+    .text-circle {
+        width: 320px;
+        height: 320px;
     }
     
     .text-circle span i {
-        font-size: 14px;
-        transform-origin: 0 110px;
+        transform-origin: 0 160px;
+        font-size: 13px;
+    }
+    
+    .record-label {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .record-label span {
+        font-size: 22px;
+    }
+    
+    .groove-1 { width: 160px; height: 160px; }
+    .groove-2 { width: 120px; height: 120px; }
+    .groove-3 { width: 80px; height: 80px; }
+    
+    .tonearm {
+        width: 150px;
+        top: 30px;
     }
     
     .loading-progress {
-        font-size: 20px;
+        font-size: 22px;
     }
     
     .loading-progress span {
-        font-size: 30px;
+        font-size: 32px;
     }
     
     .loading-bar {
-        width: 250px;
+        width: 280px;
     }
 }
 
-
-/* ===== ENDING NOTIFICATION ===== */
+/* ===== ENDING NOTIFICATION - VINYL RECORD THEME ===== */
 .ending-notification {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85);
+    background: radial-gradient(circle at center, rgba(0,0,0,0.95) 0%, #0a0a0a 100%);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     z-index: 100000;
@@ -8389,23 +8596,294 @@ img {
 
 .ending-content {
     position: relative;
-    max-width: 800px;
+    max-width: 900px;
     width: 90%;
-    padding: 60px 40px;
+    padding: 50px 40px 60px;
     text-align: center;
-    background: linear-gradient(145deg, #fff9f0, #f5e6d3);
+    background: linear-gradient(145deg, #1a1a2e, #16213e);
     border-radius: 60px;
-    box-shadow: 0 30px 80px rgba(255, 215, 0, 0.3), 0 0 0 4px #ffd700, 0 0 0 8px rgba(255, 255, 255, 0.5);
+    border: 4px solid #ffd700;
+    box-shadow: 0 30px 80px rgba(255, 215, 0, 0.3);
     transform: scale(0.8);
     transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    border: 2px solid white;
+    overflow: hidden;
 }
 
 .ending-notification.show .ending-content {
     transform: scale(1);
 }
 
-/* Hiệu ứng sparkle xung quanh */
+/* Vinyl record container */
+.ending-vinyl-container {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    margin: 0 auto 30px;
+}
+
+/* Vinyl record */
+.ending-record {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #444, #111);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 0 6px #ffd700, 0 0 0 12px rgba(255, 215, 0, 0.2);
+    animation: endingSpin 3s linear infinite;
+    z-index: 2;
+    overflow: hidden;
+}
+
+/* Vinyl grooves */
+.ending-record::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 215, 0, 0.15);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+}
+
+.ending-record::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 215, 0, 0.12);
+}
+
+.ending-groove-1, .ending-groove-2, .ending-groove-3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 2px solid rgba(255, 215, 0, 0.1);
+}
+
+.ending-groove-1 {
+    width: 180px;
+    height: 180px;
+}
+
+.ending-groove-2 {
+    width: 130px;
+    height: 130px;
+    border-width: 3px;
+    border-color: rgba(255, 215, 0, 0.15);
+}
+
+.ending-groove-3 {
+    width: 80px;
+    height: 80px;
+    border-width: 4px;
+    border-color: rgba(255, 215, 0, 0.2);
+}
+
+/* Center label with image */
+.ending-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+    border: 4px solid #ffd700;
+    overflow: hidden;
+    padding: 5px;
+}
+
+.ending-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Fallback nếu ảnh không tải được */
+.ending-label.fallback {
+    background: radial-gradient(circle, #ffd700, #b8860b);
+}
+
+.ending-label.fallback span {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: #1e293b;
+}
+
+/* Tonearm */
+.ending-tonearm {
+    position: absolute;
+    top: 30px;
+    right: -20px;
+    width: 200px;
+    height: 14px;
+    background: linear-gradient(to right, #999, #ddd);
+    transform: rotate(-15deg);
+    transform-origin: right center;
+    border-radius: 10px 0 0 10px;
+    box-shadow: -5px 5px 15px rgba(0,0,0,0.5);
+    z-index: 6;
+    transition: transform 0.8s ease-out;
+}
+
+.ending-tonearm.move-away {
+    transform: rotate(45deg) translateX(50px);
+}
+
+.ending-tonearm-tip {
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, #ffd700, #ffaa00);
+    border-radius: 50%;
+    box-shadow: 0 0 20px #ffd700;
+    border: 2px solid white;
+}
+
+.ending-tonearm-base {
+    position: absolute;
+    right: -18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    background: radial-gradient(circle, #ccc, #888);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border: 2px solid #aaa;
+}
+
+/* Music notes floating */
+.ending-music-notes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.ending-note {
+    position: absolute;
+    color: #ffd700;
+    font-size: 30px;
+    opacity: 0;
+    filter: drop-shadow(0 0 10px #ffd700);
+    animation: endingNoteFloat 4s linear infinite;
+}
+
+.ending-note:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+.ending-note:nth-child(2) { left: 30%; top: 60%; animation-delay: 0.5s; }
+.ending-note:nth-child(3) { left: 60%; top: 30%; animation-delay: 1s; }
+.ending-note:nth-child(4) { left: 80%; top: 70%; animation-delay: 1.5s; }
+.ending-note:nth-child(5) { left: 40%; top: 80%; animation-delay: 2s; }
+.ending-note:nth-child(6) { left: 70%; top: 40%; animation-delay: 2.5s; }
+
+/* Text container */
+.ending-text-container {
+    position: relative;
+    margin: 40px 0 30px;
+    z-index: 20;
+}
+
+.ending-text-line1 {
+    font-family: 'Caveat','Dancing Script', cursive;
+    font-size: 40px;
+    color: #ffd700;
+    margin-bottom: 15px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: endingSlideUp 0.8s ease forwards 0.3s;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.ending-text-line2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 70px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #ffd700, #ffaa00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+    letter-spacing: 2px;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: endingPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.8s;
+}
+
+/* Close button */
+.ending-close-btn {
+    margin-top: 20px;
+    padding: 16px 45px;
+    background: transparent;
+    color: #ffd700;
+    border: 3px solid #ffd700;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    z-index: 20;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: endingSlideUp 0.6s ease forwards 1.5s;
+}
+
+.ending-close-btn::before {
+    content: '♪';
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #ffd700;
+    opacity: 0;
+    transition: left 0.3s ease;
+}
+
+.ending-close-btn:hover {
+    background: #ffd700;
+    color: #1e293b;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+}
+
+.ending-close-btn:hover::before {
+    left: 20px;
+    opacity: 1;
+    color: #1e293b;
+}
+
+/* Decorative sparkles */
 .ending-sparkle {
     position: absolute;
     width: 100%;
@@ -8413,6 +8891,7 @@ img {
     top: 0;
     left: 0;
     pointer-events: none;
+    z-index: 5;
 }
 
 .ending-sparkle::before,
@@ -8420,176 +8899,50 @@ img {
     content: '✨';
     position: absolute;
     font-size: 40px;
-    animation: sparkleFloat 3s infinite ease-in-out;
+    color: #ffd700;
+    opacity: 0.3;
+    animation: endingSparkle 3s infinite alternate;
 }
 
 .ending-sparkle::before {
-    top: -20px;
-    left: -20px;
+    top: 20px;
+    left: 20px;
     transform: rotate(-15deg);
 }
 
 .ending-sparkle::after {
-    bottom: -20px;
-    right: -20px;
+    bottom: 20px;
+    right: 20px;
     transform: rotate(15deg);
     animation-delay: 1.5s;
 }
 
-/* Icon cảm xúc */
-.ending-emoji {
-    font-size: 80px;
-    margin-bottom: 20px;
-    animation: emojiBounce 2s infinite ease-in-out;
-    display: inline-block;
-    filter: drop-shadow(0 10px 15px rgba(255, 215, 0, 0.4));
-}
-
-/* Text chính */
-.ending-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px;
-    font-weight: 800;
-    color: #8b5a2b;
-    margin-bottom: 20px;
-    text-shadow: 3px 3px 0 #ffd700, 6px 6px 0 rgba(0, 0, 0, 0.1);
-    line-height: 1.3;
-}
-
-.ending-title span {
-    display: inline-block;
-    background: linear-gradient(135deg, #ffd700, #ffaa00);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 64px;
-    animation: glow 2s infinite;
-}
-
-/* Text chính - dòng "Đó là năm lớp 10 của" */
-.ending-text-line1 {
-    font-family: 'Caveat', cursive;
-    font-size: 36px;
-    color: #5d4a36;
-    margin-bottom: 10px;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: slideUpText 0.6s ease forwards 0.3s;
-}
-
-/* Text chính - dòng "Oizoicon đó" */
-.ending-text-line2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 72px;
-    font-weight: 900;
-    background: linear-gradient(135deg, #c45d5d, #b76e79);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 30px;
-    text-shadow: 3px 3px 0 rgba(255, 215, 0, 0.3);
-    letter-spacing: 2px;
-    opacity: 0;
-    transform: scale(0.5);
-    animation: popText 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 0.6s;
-}
-
-/* Nút đóng */
-.ending-close-btn {
-    margin-top: 30px;
-    padding: 15px 40px;
-    background: #ffd700;
-    color: #1e293b;
-    border: none;
-    border-radius: 50px;
-    font-size: 18px;
-    font-weight: 700;
-    font-family: 'Be Vietnam Pro', sans-serif;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
-    border: 2px solid white;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: slideUpText 0.6s ease forwards 1.2s;
-}
-
-.ending-close-btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    background: #ffed4d;
-    box-shadow: 0 15px 35px rgba(255, 215, 0, 0.6);
-}
-
-/* Hiệu ứng bóng bay */
-.ending-balloons {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.balloon {
-    position: absolute;
-    font-size: 40px;
-    animation: balloonFloat 6s linear infinite;
-    opacity: 0;
-}
-
-.balloon:nth-child(1) { left: 10%; bottom: -50px; animation-delay: 0s; }
-.balloon:nth-child(2) { left: 30%; bottom: -50px; animation-delay: 1s; }
-.balloon:nth-child(3) { left: 50%; bottom: -50px; animation-delay: 2s; }
-.balloon:nth-child(4) { left: 70%; bottom: -50px; animation-delay: 3s; }
-.balloon:nth-child(5) { left: 90%; bottom: -50px; animation-delay: 4s; }
-
-/* Confetti */
-.ending-confetti {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.confetti-piece {
-    position: absolute;
-    width: 10px;
-    height: 20px;
-    background: #ffd700;
-    top: -20px;
-    opacity: 0;
-    animation: confettiFall 3s linear infinite;
-}
-
-.confetti-piece:nth-child(1) { left: 20%; background: #ff6b6b; animation-delay: 0s; }
-.confetti-piece:nth-child(2) { left: 40%; background: #4ecdc4; animation-delay: 0.5s; }
-.confetti-piece:nth-child(3) { left: 60%; background: #ffd700; animation-delay: 1s; }
-.confetti-piece:nth-child(4) { left: 80%; background: #b76e79; animation-delay: 1.5s; }
-
 /* Animations */
-@keyframes sparkleFloat {
-    0%, 100% {
-        transform: rotate(-15deg) translateY(0) scale(1);
-        opacity: 0.8;
-    }
-    50% {
-        transform: rotate(-15deg) translateY(-20px) scale(1.2);
-        opacity: 1;
-    }
+@keyframes endingSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-@keyframes emojiBounce {
-    0%, 100% {
+@keyframes endingNoteFloat {
+    0% {
         transform: translateY(0) rotate(0deg);
+        opacity: 0;
     }
-    50% {
-        transform: translateY(-20px) rotate(5deg);
+    20% {
+        opacity: 1;
+        transform: translateY(-20px) rotate(10deg);
+    }
+    80% {
+        opacity: 1;
+        transform: translateY(-80px) rotate(30deg);
+    }
+    100% {
+        transform: translateY(-150px) rotate(50deg);
+        opacity: 0;
     }
 }
 
-@keyframes slideUpText {
+@keyframes endingSlideUp {
     from {
         opacity: 0;
         transform: translateY(30px);
@@ -8600,7 +8953,7 @@ img {
     }
 }
 
-@keyframes popText {
+@keyframes endingPop {
     0% {
         opacity: 0;
         transform: scale(0.3);
@@ -8615,63 +8968,41 @@ img {
     }
 }
 
-@keyframes glow {
-    0%, 100% {
-        text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-    }
-    50% {
-        text-shadow: 0 0 40px rgba(255, 215, 0, 0.9), 0 0 60px #ffaa00;
-    }
-}
-
-@keyframes balloonFloat {
+@keyframes endingSparkle {
     0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
+        opacity: 0.2;
+        transform: scale(1) rotate(-15deg);
     }
     100% {
-        transform: translateY(-100vh) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-@keyframes confettiFall {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(100vh) rotate(720deg);
-        opacity: 1;
+        opacity: 0.6;
+        transform: scale(1.2) rotate(-10deg);
     }
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .ending-content {
-        padding: 40px 20px;
+    .ending-vinyl-container {
+        width: 280px;
+        height: 280px;
     }
     
-    .ending-emoji {
-        font-size: 60px;
+    .ending-label {
+        width: 100px;
+        height: 100px;
     }
     
-    .ending-title {
-        font-size: 36px;
+    .ending-label.fallback span {
+        font-size: 20px;
     }
     
-    .ending-title span {
-        font-size: 48px;
+    .ending-tonearm {
+        width: 150px;
+        top: 20px;
+        right: -10px;
     }
     
     .ending-text-line1 {
-        font-size: 28px;
+        font-size: 30px;
     }
     
     .ending-text-line2 {
@@ -8679,7 +9010,141 @@ img {
     }
     
     .ending-close-btn {
-        padding: 12px 30px;
+        padding: 12px 35px;
         font-size: 16px;
+    }
+    
+    .ending-groove-1 { width: 140px; height: 140px; }
+    .ending-groove-2 { width: 100px; height: 100px; }
+    .ending-groove-3 { width: 60px; height: 60px; }
+}
+
+/* ===== RIPPLE EFFECT ===== */
+.ripple-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.7) 0%, rgba(255, 215, 0, 0) 70%);
+    transform: scale(0);
+    animation: ripple-animation 0.8s ease-out;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: overlay;
+}
+
+/* Ripple cho nốt nhạc */
+.ripple-music {
+    position: absolute;
+    border-radius: 50%;
+    background: transparent;
+    transform: scale(0);
+    animation: ripple-music-animation 1s ease-out;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.ripple-music::before,
+.ripple-music::after {
+    content: '♪';
+    position: absolute;
+    color: #ffd700;
+    font-size: 24px;
+    text-shadow: 0 0 20px #ffd700;
+    animation: note-spin 0.8s ease-out;
+}
+
+.ripple-music::before {
+    left: -20px;
+    top: -20px;
+}
+
+.ripple-music::after {
+    right: -20px;
+    bottom: -20px;
+    content: '♫';
+}
+
+/* Ripple cho navigation */
+.ripple-nav {
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.9) 0%, rgba(255, 215, 0, 0) 80%);
+    mix-blend-mode: screen;
+}
+
+/* Particle System Container */
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9995;
+    opacity: 0.6;
+}
+
+/* Hiệu ứng khi loading xong */
+.particles-loaded #particle-canvas {
+    animation: fadeInParticles 1.5s ease;
+}
+
+/* Animations */
+@keyframes ripple-animation {
+    from {
+        transform: scale(0);
+        opacity: 0.8;
+    }
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+@keyframes ripple-music-animation {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    50% {
+        transform: scale(3);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(5);
+        opacity: 0;
+    }
+}
+
+@keyframes note-spin {
+    0% {
+        transform: rotate(0deg) scale(0.5);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.5);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+@keyframes fadeInParticles {
+    from { opacity: 0; }
+    to { opacity: 0.6; }
+}
+
+/* Giảm hiệu ứng trên mobile */
+@media (max-width: 768px) {
+    .ripple-effect {
+        display: none;
+    }
+    
+    #particle-canvas {
+        opacity: 0.2;
     }
 }

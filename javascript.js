@@ -1206,16 +1206,16 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// ===== LOADING SCREEN WITH FADE IN EFFECT =====
+// ===== LOADING SCREEN WITH VINYL RECORD =====
 document.addEventListener('DOMContentLoaded', function() {
-    // Text chạy theo vòng tròn
-    const text = " OIZOIOICON NĂM LỚP 10 ";
+    // Text chạy theo vòng tròn - "Back to 2023-2024 with Oizoicon"
+    const text = " BACK TO 2023-2024 WITH OIZOICON ";
     const rotatingText = document.getElementById('rotatingText');
     const loadingPercent = document.getElementById('loadingPercent');
     const loadingBarFill = document.getElementById('loadingBarFill');
     const loadingScreen = document.getElementById('loadingScreen');
     
-    // Tạo các chữ xoay tròn với hiệu ứng fade in
+    // Tạo các chữ xoay tròn
     if (rotatingText) {
         let html = '';
         for (let i = 0; i < text.length; i++) {
@@ -1224,51 +1224,42 @@ document.addEventListener('DOMContentLoaded', function() {
         rotatingText.innerHTML = html;
     }
     
-    // Lấy tất cả các chữ để theo dõi
+    // Lấy tất cả các chữ
     const letters = document.querySelectorAll('.text-circle span i');
     
     // Giả lập quá trình loading
     let progress = 0;
-    const loadingTime = 3000; // 3 giây
-    const interval = 30; // Cập nhật mỗi 30ms
+    const loadingTime = 3500; // 3.5 giây
+    const interval = 30;
+    
+    // Thêm hiệu ứng fade in cho từng chữ theo thứ tự
+    letters.forEach((letter, index) => {
+        setTimeout(() => {
+            letter.style.opacity = '1';
+            letter.classList.add('loaded');
+        }, 100 + (index * 50)); // Mỗi chữ cách nhau 50ms
+    });
     
     const loadingInterval = setInterval(function() {
         progress += (interval / loadingTime) * 100;
-        
-        // Kích hoạt hiệu ứng hoàn thành cho từng chữ dựa trên progress
-        if (letters.length > 0) {
-            const letterProgress = Math.floor((progress / 100) * letters.length);
-            
-            // Thêm class loaded cho các chữ đã hoàn thành
-            for (let i = 0; i < letterProgress; i++) {
-                if (i < letters.length && !letters[i].classList.contains('loaded')) {
-                    letters[i].classList.add('loaded');
-                }
-            }
-        }
         
         if (progress >= 100) {
             progress = 100;
             clearInterval(loadingInterval);
             
-            // Đảm bảo tất cả chữ đều có class loaded
+            // Đảm bảo tất cả chữ đều hiển thị
             letters.forEach(letter => {
+                letter.style.opacity = '1';
                 letter.classList.add('loaded');
             });
             
-            // ẨN MÀN HÌNH LOADING (không xóa text)
+            // Ẩn màn hình loading sau khi hoàn tất
             setTimeout(function() {
                 loadingScreen.classList.add('hidden');
-                
-                // Cho phép scroll
                 document.body.style.overflow = '';
                 
-                // Bắt đầu các animation khác
+                // Kích hoạt các animation khác
                 startMainAnimations();
-                
-                // VẪN GIỮ LẠI TEXT - không xóa
-                // Các chữ vẫn hiển thị trên màn hình loading đang fade out
-                
             }, 800);
         }
         
@@ -1288,7 +1279,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Hàm bắt đầu các animation chính sau loading
     function startMainAnimations() {
-        // Kích hoạt các observer
+        // Kích hoạt các observer cho các section
         const quoteSection = document.querySelector('.quote-section');
         if (quoteSection) {
             const observer = new IntersectionObserver((entries) => {
@@ -1314,27 +1305,84 @@ document.addEventListener('DOMContentLoaded', function() {
             observer.observe(el);
         });
     }
+    
+    // Thêm hiệu ứng đặc biệt khi loading gần xong
+    let lastProgress = 0;
+    const checkProgress = setInterval(() => {
+        if (progress > lastProgress) {
+            lastProgress = progress;
+            
+            // Khi progress đạt các mốc, tạo hiệu ứng
+            if (progress > 30 && progress < 35) {
+                createNoteEffect();
+            }
+            if (progress > 60 && progress < 65) {
+                createNoteEffect();
+            }
+            if (progress > 90 && progress < 95) {
+                createNoteEffect();
+            }
+        }
+    }, 100);
+    
+    function createNoteEffect() {
+        const notes = ['♪', '♫', '♬', '♩'];
+        for (let i = 0; i < 5; i++) {
+            setTimeout(() => {
+                const note = document.createElement('div');
+                note.className = 'note-animation';
+                note.textContent = notes[Math.floor(Math.random() * notes.length)];
+                note.style.cssText = `
+                    position: absolute;
+                    left: ${Math.random() * 100}%;
+                    top: ${Math.random() * 100}%;
+                    color: #ffd700;
+                    font-size: ${20 + Math.random() * 20}px;
+                    animation: noteFloat 2s ease-out forwards;
+                    pointer-events: none;
+                    z-index: 10;
+                `;
+                document.querySelector('.loader-container').appendChild(note);
+                
+                setTimeout(() => note.remove(), 2000);
+            }, i * 100);
+        }
+    }
 });
-
-// ===== ENDING NOTIFICATION =====
+// ===== ENDING NOTIFICATION WITH VINYL RECORD =====
 document.addEventListener('DOMContentLoaded', function() {
     const endingNotification = document.getElementById('endingNotification');
     const endingCloseBtn = document.getElementById('endingCloseBtn');
     const finalSection = document.getElementById('final-memory-strip-section');
+    const endingRecord = document.getElementById('endingRecord');
+    const endingTonearm = document.getElementById('endingTonearm');
     
-    // Biến để kiểm tra đã hiện thông báo chưa
     let hasShownEnding = false;
     
-    // Hàm hiển thị thông báo kết thúc
     function showEndingNotification() {
         if (!hasShownEnding && endingNotification) {
             endingNotification.classList.add('show');
             hasShownEnding = true;
             
-            // Tạo hiệu ứng âm thầm (có thể thay bằng hiệu ứng khác)
-            createConfetti();
+            // Đĩa đang quay, sau đó ngừng và cần gạt rời đi
+            setTimeout(() => {
+                // Đĩa ngừng quay
+                if (endingRecord) {
+                    endingRecord.style.animation = 'none';
+                }
+                
+                // Cần gạt rời khỏi đĩa
+                setTimeout(() => {
+                    if (endingTonearm) {
+                        endingTonearm.classList.add('move-away');
+                    }
+                    
+                    // Tạo hiệu ứng nốt nhạc bay lên
+                    createEndingNoteEffect();
+                    
+                }, 800);
+            }, 1500);
             
-            // Tự động cuộn lên một chút để thấy thông báo rõ hơn
             setTimeout(() => {
                 endingNotification.scrollIntoView({ 
                     behavior: 'smooth', 
@@ -1344,57 +1392,62 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Hàm tạo hiệu ứng confetti đơn giản
-    function createConfetti() {
-        for (let i = 0; i < 50; i++) {
+    function createEndingNoteEffect() {
+        const notes = ['♪', '♫', '♬', '♩'];
+        for (let i = 0; i < 20; i++) {
             setTimeout(() => {
-                const confetti = document.createElement('div');
-                confetti.style.cssText = `
+                const note = document.createElement('div');
+                note.className = 'ending-note';
+                note.textContent = notes[Math.floor(Math.random() * notes.length)];
+                note.style.cssText = `
                     position: fixed;
                     left: ${Math.random() * 100}%;
-                    top: -20px;
-                    width: 10px;
-                    height: 20px;
-                    background: hsl(${Math.random() * 360}, 100%, 50%);
-                    border-radius: 3px;
-                    z-index: 100001;
-                    animation: confettiFall 3s linear forwards;
+                    top: ${20 + Math.random() * 60}%;
+                    color: #ffd700;
+                    font-size: ${20 + Math.random() * 30}px;
+                    animation: endingNoteFloat 3s ease-out forwards;
                     pointer-events: none;
+                    z-index: 100001;
+                    text-shadow: 0 0 15px #ffd700;
                 `;
-                document.body.appendChild(confetti);
+                document.body.appendChild(note);
                 
-                setTimeout(() => confetti.remove(), 3000);
-            }, i * 50);
+                setTimeout(() => note.remove(), 3000);
+            }, i * 100);
         }
     }
     
-    // Theo dõi khi người dùng cuộn đến phần cuối
     function checkEndingSection() {
         if (hasShownEnding || !finalSection) return;
         
         const rect = finalSection.getBoundingClientRect();
         const windowHeight = window.innerHeight;
         
-        // Kiểm tra nếu đã cuộn qua 70% của section cuối
-        if (rect.top < windowHeight * 0.9 && rect.bottom > 0) {
+        // Hiện khi cuộn qua 70% của section cuối
+        if (rect.top < windowHeight * 0.3 && rect.bottom > 0) {
             showEndingNotification();
         }
     }
     
-    // Thêm event listener cho scroll
     window.addEventListener('scroll', function() {
-        // Dùng requestAnimationFrame để tối ưu performance
         if (!hasShownEnding) {
             window.requestAnimationFrame(checkEndingSection);
         }
     });
     
-    // Nút đóng thông báo
     if (endingCloseBtn) {
         endingCloseBtn.addEventListener('click', function() {
             endingNotification.classList.remove('show');
             
-            // Cuộn lên đầu trang để xem lại
+            // Reset trạng thái đĩa và cần gạt
+            if (endingRecord) {
+                endingRecord.style.animation = 'endingSpin 3s linear infinite';
+            }
+            if (endingTonearm) {
+                endingTonearm.classList.remove('move-away');
+            }
+            
+            // Cuộn lên đầu trang
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -1402,34 +1455,489 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Click bên ngoài để đóng (tùy chọn)
     if (endingNotification) {
         endingNotification.addEventListener('click', function(e) {
             if (e.target === endingNotification) {
                 endingNotification.classList.remove('show');
+                
+                if (endingRecord) {
+                    endingRecord.style.animation = 'endingSpin 3s linear infinite';
+                }
+                if (endingTonearm) {
+                    endingTonearm.classList.remove('move-away');
+                }
             }
         });
     }
     
-    // Kiểm tra ngay khi load (nếu đã ở cuối trang)
     setTimeout(checkEndingSection, 1000);
     
-    // Thêm keyframes cho confetti nếu chưa có
-    if (!document.querySelector('#ending-keyframes')) {
-        const style = document.createElement('style');
-        style.id = 'ending-keyframes';
-        style.textContent = `
-            @keyframes confettiFall {
-                0% {
-                    transform: translateY(0) rotate(0deg);
-                    opacity: 1;
-                }
-                100% {
-                    transform: translateY(100vh) rotate(720deg);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
+   
 });
+
+
+// ===== RIPPLE EFFECT =====
+class RippleEffect {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        // Thêm ripple cho tất cả các phần tử có thể click
+        const clickableElements = [
+            '.nav-item',
+            '.control-btn',
+            '.scroll-top-btn',
+            '.feedback-btn',
+            '.ending-close-btn',
+            '.polaroid-frame',
+            '.grid-item',
+            '.photo-frame',
+            '.club-card',
+            '.team-card',
+            '.nav-link',
+            '.memory-card',
+            '.grid-item',
+            '.extra-item'
+        ];
+        
+        clickableElements.forEach(selector => {
+            document.querySelectorAll(selector).forEach(element => {
+                element.classList.add('ripple-container');
+                element.addEventListener('click', this.createRipple.bind(this));
+            });
+        });
+        
+        // Ripple đặc biệt cho navigation items
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', this.createMusicRipple.bind(this));
+        });
+        
+        // Ripple cho ảnh polaroid
+        document.querySelectorAll('.polaroid-frame, .photo-frame').forEach(item => {
+            item.addEventListener('click', this.createPolaroidRipple.bind(this));
+        });
+    }
+    
+    createRipple(e) {
+        const element = e.currentTarget;
+        
+        // Xóa ripple cũ nếu có
+        const oldRipple = element.querySelector('.ripple-effect');
+        if (oldRipple) oldRipple.remove();
+        
+        // Tạo ripple mới
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple-effect';
+        
+        // Tính toán vị trí
+        const rect = element.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height) * 1.5;
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        // Set style
+        ripple.style.width = size + 'px';
+        ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        
+        element.appendChild(ripple);
+        
+        // Xóa sau khi animation kết thúc
+        setTimeout(() => ripple.remove(), 800);
+    }
+    
+    createMusicRipple(e) {
+        const element = e.currentTarget;
+        
+        // Tạo ripple hình nốt nhạc
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple-music';
+        
+        const rect = element.getBoundingClientRect();
+        const size = 100;
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.width = size + 'px';
+        ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        
+        element.appendChild(ripple);
+        
+        // Tạo thêm các nốt nhạc nhỏ bay ra
+        for (let i = 0; i < 5; i++) {
+            this.createFloatingNote(e.clientX, e.clientY);
+        }
+        
+        setTimeout(() => ripple.remove(), 1000);
+    }
+    
+    createPolaroidRipple(e) {
+        const element = e.currentTarget;
+        
+        // Tạo nhiều ripple cùng lúc
+        for (let i = 0; i < 3; i++) {
+            setTimeout(() => {
+                const ripple = document.createElement('span');
+                ripple.className = 'ripple-effect';
+                ripple.style.background = `radial-gradient(circle, rgba(255, 215, 0, ${0.3 + i * 0.2}) 0%, transparent 70%)`;
+                
+                const rect = element.getBoundingClientRect();
+                const size = 80 + i * 30;
+                const x = e.clientX - rect.left - size / 2 + (Math.random() - 0.5) * 50;
+                const y = e.clientY - rect.top - size / 2 + (Math.random() - 0.5) * 50;
+                
+                ripple.style.width = size + 'px';
+                ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                
+                element.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 800);
+            }, i * 100);
+        }
+    }
+    
+    createFloatingNote(x, y) {
+        const note = document.createElement('div');
+        const notes = ['♪', '♫', '♬', '♩'];
+        note.innerHTML = notes[Math.floor(Math.random() * notes.length)];
+        note.style.cssText = `
+            position: fixed;
+            left: ${x}px;
+            top: ${y}px;
+            color: #ffd700;
+            font-size: ${20 + Math.random() * 20}px;
+            font-weight: bold;
+            text-shadow: 0 0 15px #ffd700;
+            pointer-events: none;
+            z-index: 10000;
+            animation: noteFloat 1s ease-out forwards;
+            transform: rotate(${Math.random() * 360}deg);
+        `;
+        document.body.appendChild(note);
+        
+        setTimeout(() => note.remove(), 1000);
+    }
+}
+
+// Khởi tạo Ripple Effect khi DOM loaded
+document.addEventListener('DOMContentLoaded', () => {
+    window.rippleEffect = new RippleEffect();
+});
+
+// ===== PARTICLE SYSTEM WITH THREE.JS =====
+class ParticleSystem {
+    constructor() {
+        this.scene = null;
+        this.camera = null;
+        this.renderer = null;
+        this.particles = null;
+        this.mouseX = 0;
+        this.mouseY = 0;
+        this.targetRotation = { x: 0, y: 0 };
+        this.currentRotation = { x: 0, y: 0 };
+        this.scrollSpeed = 0;
+        this.lastScrollY = 0;
+        this.clock = new THREE.Clock();
+        
+        this.init();
+    }
+    
+    init() {
+        // Kiểm tra thiết bị di động - giảm chất lượng nếu cần
+        const isMobile = window.innerWidth <= 768;
+        const particleCount = isMobile ? 150 : 400;
+        
+        // Tạo scene
+        this.scene = new THREE.Scene();
+        
+        // Tạo camera
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        this.camera.position.z = isMobile ? 80 : 50;
+        
+        // Tạo renderer trong suốt
+        this.renderer = new THREE.WebGLRenderer({ 
+            alpha: true,
+            antialias: !isMobile
+        });
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setClearColor(0x000000, 0);
+        this.renderer.setPixelRatio(isMobile ? 1 : window.devicePixelRatio);
+        this.renderer.domElement.id = 'particle-canvas';
+        
+        // Thêm vào body
+        document.body.appendChild(this.renderer.domElement);
+        
+        // Tạo particle texture
+        const texture = this.createParticleTexture();
+        
+        // Tạo geometry
+        const geometry = new THREE.BufferGeometry();
+        
+        // Tạo positions và colors
+        const positions = new Float32Array(particleCount * 3);
+        const colors = new Float32Array(particleCount * 3);
+        const sizes = new Float32Array(particleCount);
+        
+        for (let i = 0; i < particleCount; i++) {
+            // Phân bố trong hình cầu
+            const radius = 30 + Math.random() * 40;
+            const theta = Math.random() * Math.PI * 2;
+            const phi = Math.acos(2 * Math.random() - 1);
+            
+            const x = radius * Math.sin(phi) * Math.cos(theta);
+            const y = radius * Math.sin(phi) * Math.sin(theta);
+            const z = radius * Math.cos(phi);
+            
+            positions[i * 3] = x;
+            positions[i * 3 + 1] = y;
+            positions[i * 3 + 2] = z;
+            
+            // Màu sắc - gradient từ vàng sang hồng
+            const color = new THREE.Color();
+            const hue = 0.12 + Math.random() * 0.1; // Vàng đến cam
+            color.setHSL(hue, 0.9, 0.6);
+            
+            colors[i * 3] = color.r;
+            colors[i * 3 + 1] = color.g;
+            colors[i * 3 + 2] = color.b;
+            
+            // Kích thước ngẫu nhiên
+            sizes[i] = 0.3 + Math.random() * 0.7;
+        }
+        
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+        geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+        
+        // Material
+        const material = new THREE.PointsMaterial({
+            size: 0.4,
+            map: texture,
+            vertexColors: true,
+            transparent: true,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false,
+            sizeAttenuation: true
+        });
+        
+        this.particles = new THREE.Points(geometry, material);
+        this.scene.add(this.particles);
+        
+        // Bind events
+        this.bindEvents();
+        
+        // Start animation
+        this.animate();
+    }
+    
+    createParticleTexture() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 32;
+        canvas.height = 32;
+        const ctx = canvas.getContext('2d');
+        
+        // Vẽ nốt nhạc
+        ctx.fillStyle = 'white';
+        ctx.font = '24px "Caveat", "Arial"';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        
+        // Random giữa các nốt nhạc khác nhau
+        const notes = ['♪', '♫', '♬', '♩'];
+        ctx.fillText(notes[Math.floor(Math.random() * notes.length)], 16, 16);
+        
+        // Thêm glow effect
+        ctx.shadowColor = '#ffd700';
+        ctx.shadowBlur = 10;
+        
+        return new THREE.CanvasTexture(canvas);
+    }
+    
+    bindEvents() {
+        // Mouse move
+        document.addEventListener('mousemove', (e) => {
+            this.mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+            this.mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+            
+            // Target rotation dựa trên mouse
+            this.targetRotation.y = this.mouseX * 2;
+            this.targetRotation.x = this.mouseY * 1.5;
+        });
+        
+        // Scroll speed detection
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.scrollY;
+            this.scrollSpeed = Math.abs(currentScroll - this.lastScrollY) * 0.01;
+            this.lastScrollY = currentScroll;
+            
+            // Giới hạn scroll speed
+            this.scrollSpeed = Math.min(this.scrollSpeed, 2);
+        });
+        
+        // Window resize
+        window.addEventListener('resize', () => {
+            this.camera.aspect = window.innerWidth / window.innerHeight;
+            this.camera.updateProjectionMatrix();
+            this.renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Section enter effects
+        this.setupSectionEffects();
+    }
+    
+    setupSectionEffects() {
+        const sections = document.querySelectorAll('section');
+        
+        sections.forEach((section, index) => {
+            ScrollTrigger.create({
+                trigger: section,
+                start: 'top center',
+                end: 'bottom center',
+                onEnter: () => this.onSectionEnter(index),
+                onLeave: () => this.onSectionLeave(index),
+                onEnterBack: () => this.onSectionEnter(index),
+                onLeaveBack: () => this.onSectionLeave(index)
+            });
+        });
+    }
+    
+    onSectionEnter(index) {
+        // Thay đổi màu sắc particles khi vào section
+        const colors = [
+            { h: 0.12, name: 'khai giảng' },  // Vàng
+            { h: 0.0, name: 'quote' },         // Đỏ
+            { h: 0.6, name: 'polaroid' },      // Xanh
+            { h: 0.8, name: 'nhật ký' },       // Tím
+            { h: 0.1, name: '20/11' },          // Cam
+        ];
+        
+        const colorIndex = index % colors.length;
+        this.pulseColor(colors[colorIndex].h);
+    }
+    
+    onSectionLeave(index) {
+        // Reset màu
+        this.pulseColor(0.12);
+    }
+    
+    pulseColor(hue) {
+        // Thay đổi màu dần dần
+        const positions = this.particles.geometry.attributes.position.array;
+        const colors = this.particles.geometry.attributes.color.array;
+        
+        for (let i = 0; i < colors.length; i += 3) {
+            const color = new THREE.Color();
+            color.setHSL(hue + (Math.random() - 0.5) * 0.1, 0.9, 0.6);
+            
+            colors[i] = color.r;
+            colors[i + 1] = color.g;
+            colors[i + 2] = color.b;
+        }
+        
+        this.particles.geometry.attributes.color.needsUpdate = true;
+    }
+    
+    animate() {
+        requestAnimationFrame(() => this.animate());
+        
+        const delta = this.clock.getDelta();
+        
+        // Smooth rotation
+        this.currentRotation.y += (this.targetRotation.y - this.currentRotation.y) * 0.05;
+        this.currentRotation.x += (this.targetRotation.x - this.currentRotation.x) * 0.05;
+        
+        // Thêm hiệu ứng từ scroll
+        if (this.scrollSpeed > 0) {
+            this.currentRotation.z += this.scrollSpeed * 0.02;
+            this.scrollSpeed *= 0.95; // Giảm dần
+        }
+        
+        // Apply rotation
+        if (this.particles) {
+            this.particles.rotation.x = this.currentRotation.x;
+            this.particles.rotation.y = this.currentRotation.y;
+            
+            // Pulse effect dựa trên scroll position
+            const scrollProgress = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+            this.particles.scale.setScalar(1 + Math.sin(Date.now() * 0.001) * 0.1 + scrollProgress * 0.5);
+        }
+        
+        this.renderer.render(this.scene, this.camera);
+    }
+    
+    // Clean up
+    destroy() {
+        if (this.renderer) {
+            this.renderer.dispose();
+            this.renderer.domElement.remove();
+        }
+    }
+}
+
+// ===== RIÊNG CHO MOBILE =====
+class MobileParticleSystem {
+    constructor() {
+        // Phiên bản đơn giản hóa cho mobile
+        this.canvas = document.createElement('canvas');
+        this.canvas.id = 'particle-canvas';
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        
+        this.init();
+    }
+    
+    init() {
+        document.body.appendChild(this.canvas);
+        this.resize();
+        
+        // Tạo particles
+        for (let i = 0; i < 50; i++) {
+            this.particles.push({
+                x: Math.random(),
+                y: Math.random(),
+                size: 2 + Math.random() * 3,
+                speedX: (Math.random() - 0.5) * 0.5,
+                speedY: (Math.random() - 0.5) * 0.5,
+                note: ['♪', '♫', '♬', '♩'][Math.floor(Math.random() * 4)]
+            });
+        }
+        
+        this.animate();
+        
+        window.addEventListener('resize', () => this.resize());
+    }
+    
+    resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+    }
+    
+    animate() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        this.particles.forEach(p => {
+            // Di chuyển
+            p.x += p.speedX * 0.01;
+            p.y += p.speedY * 0.01;
+            
+            // Wrap around
+            if (p.x < 0) p.x = 1;
+            if (p.x > 1) p.x = 0;
+            if (p.y < 0) p.y = 1;
+            if (p.y > 1) p.y = 0;
+            
+            // Vẽ
+            this.ctx.font = `${p.size * 8}px "Caveat"`;
+            this.ctx.fillStyle = 'rgba(255, 215, 0, 0.3)';
+            this.ctx.fillText(p.note, p.x * this.canvas.width, p.y * this.canvas.height);
+        });
+        
+        requestAnimationFrame(() => this.animate());
+    }
+}
+
