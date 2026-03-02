@@ -1026,136 +1026,410 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// ===== TIMELINE NAVIGATION - ẨN NHẸ BÊN TRÁI =====
+// ===== RIGHT SIDE NAVIGATION BAR - FIXED =====
 document.addEventListener('DOMContentLoaded', function() {
-    // Danh sách các section theo thứ tự
-    const sections = [
-        { id: 'fullscreen-image-container', name: 'Khai giảng', icon: '🎓' },
-        { id: 'quote-section', name: 'Slogan', icon: '💬' },
-        { id: 'polaroid-section', name: '20/10', icon: '📸' },
-        { id: 'journal-wrapper', name: 'Nhật ký', icon: '📔' },
-        { id: 'journal-section', name: '20/11', icon: '🌸' },
-        { id: 'backstage-section', name: 'Hậu trường', icon: '🎬' },
-        { id: 'media-section', name: 'Bài ca tôm cá', icon: '🎵' },
-        { id: 'final-award-section', name: 'Giải III', icon: '🏆' },
-        { id: 'thanhlich-section', name: 'Thanh lịch', icon: '👑' },
-        { id: 'hau-truong-section', name: 'Deadline', icon: '⏰' },
-        { id: 'traidinh-section', name: 'Yakult', icon: '🥛' },
-        { id: 'memory-section', name: 'AEON Mall', icon: '🏬' },
-        { id: 'tet-section', name: 'Cận Tết', icon: '🎋' },
-        { id: 'cultural-section', name: '8/3', icon: '🌺' },
-        { id: 'summary-section', name: 'Tổng kết', icon: '📊' },
-        { id: 'club-section', name: 'CLB', icon: '🎭' },
-        { id: 'teams-section', name: 'Đội tuyển', icon: '⚽' },
-        { id: 'collage-section', name: 'Khoảnh khắc', icon: '🖼️' }
-    ];
-
-    // Tạo timeline
-    function createTimeline() {
-        // Kiểm tra nếu đã tồn tại thì không tạo lại
-        if (document.querySelector('.timeline-wrapper')) return;
-        
-        const timelineWrapper = document.createElement('div');
-        timelineWrapper.className = 'timeline-wrapper';
-        timelineWrapper.setAttribute('aria-label', 'Timeline điều hướng');
-        
-        sections.forEach((section, index) => {
-            const timelineItem = document.createElement('div');
-            timelineItem.className = 'timeline-item';
-            timelineItem.setAttribute('data-section', section.id);
-            timelineItem.setAttribute('data-index', index);
+    const navItems = document.querySelectorAll('.nav-item[data-section]');
+    const scrollTopBtn = document.querySelector('.scroll-top-btn');
+    const progressEl = document.getElementById('scrollProgress');
+    const navBar = document.querySelector('.right-nav-bar');
+    
+    if (!navItems.length) return;
+    
+    // Danh sách sections từ data-section
+    const sections = [];
+    navItems.forEach(item => {
+        const sectionId = item.dataset.section;
+        if (document.getElementById(sectionId)) {
+            sections.push(sectionId);
+        }
+    });
+    
+    // Click vào nav item
+    navItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const sectionId = this.dataset.section;
+            const targetSection = document.getElementById(sectionId);
             
-            const dot = document.createElement('span');
-            dot.className = 'timeline-dot';
-            
-            const label = document.createElement('span');
-            label.className = 'timeline-label';
-            label.innerHTML = `<span>${section.icon}</span> ${section.name}`;
-            
-            timelineItem.appendChild(dot);
-            timelineItem.appendChild(label);
-            
-            timelineItem.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const targetSection = document.getElementById(section.id);
-                if (targetSection) {
-                    targetSection.scrollIntoView({ behavior: 'smooth' });
-                    
-                    // Thêm hiệu ứng highlight cho section
-                    targetSection.classList.add('section-highlight');
-                    setTimeout(() => {
-                        targetSection.classList.remove('section-highlight');
-                    }, 1000);
-                }
-            });
-            
-            timelineWrapper.appendChild(timelineItem);
-        });
-        
-        document.body.appendChild(timelineWrapper);
-        
-        // Thêm sự kiện để giữ timeline hiện khi hover vào phần nhô ra
-        const pseudoTrigger = document.createElement('div');
-        pseudoTrigger.className = 'timeline-trigger';
-        pseudoTrigger.style.cssText = `
-            position: fixed;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 30px;
-            height: 60px;
-            z-index: 9998;
-            cursor: pointer;
-        `;
-        
-        pseudoTrigger.addEventListener('mouseenter', function() {
-            timelineWrapper.style.right = '0';
-        });
-        
-        pseudoTrigger.addEventListener('mouseleave', function() {
-            if (!timelineWrapper.matches(':hover')) {
-                timelineWrapper.style.right = '180px';
+            if (targetSection) {
+                const headerHeight = document.querySelector('.site-header')?.offsetHeight || 90;
+                const elementPosition = targetSection.getBoundingClientRect().top + window.scrollY;
+                const offsetPosition = elementPosition - headerHeight - 20;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+                
+                targetSection.classList.add('section-highlight');
+                setTimeout(() => {
+                    targetSection.classList.remove('section-highlight');
+                }, 1000);
             }
         });
-        
-        document.body.appendChild(pseudoTrigger);
-        
-        // Xử lý khi chuột rời khỏi timeline
-        timelineWrapper.addEventListener('mouseleave', function() {
-            this.style.right = '180px';
+    });
+    
+    // Scroll to top button
+    if (scrollTopBtn) {
+        scrollTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
     }
-
-    // Cập nhật active section khi scroll
-    function updateActiveTimeline() {
-        const timelineItems = document.querySelectorAll('.timeline-item');
-        if (!timelineItems.length) return;
+    
+    // Update active nav item và progress khi scroll
+    function updateActiveNav() {
+        const headerHeight = document.querySelector('.site-header')?.offsetHeight || 90;
+        const scrollPosition = window.scrollY + headerHeight + 100;
         
-        const scrollPosition = window.scrollY + 200;
+        const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = windowHeight > 0 ? (window.scrollY / windowHeight) * 100 : 0;
         
-        sections.forEach((section, index) => {
-            const element = document.getElementById(section.id);
-            if (element) {
-                const { offsetTop, offsetHeight } = element;
-                if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-                    timelineItems.forEach(item => item.classList.remove('active'));
-                    if (timelineItems[index]) {
-                        timelineItems[index].classList.add('active');
+        if (progressEl) {
+            const percent = Math.min(100, Math.max(0, Math.round(scrolled)));
+            progressEl.textContent = percent + '%';
+        }
+        
+        let currentSectionIndex = -1;
+        
+        for (let i = 0; i < sections.length; i++) {
+            const section = document.getElementById(sections[i]);
+            if (section) {
+                const offsetTop = section.offsetTop;
+                const offsetBottom = offsetTop + section.offsetHeight;
+                
+                if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
+                    currentSectionIndex = i;
+                    break;
+                }
+            }
+        }
+        
+        navItems.forEach((item, index) => {
+            if (index === currentSectionIndex) {
+                item.classList.add('active');
+                
+                if (navBar) {
+                    const itemTop = item.offsetTop;
+                    const itemBottom = itemTop + item.offsetHeight;
+                    const navTop = navBar.scrollTop;
+                    const navBottom = navTop + navBar.clientHeight;
+                    
+                    if (itemTop < navTop || itemBottom > navBottom) {
+                        item.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
                     }
                 }
+            } else {
+                item.classList.remove('active');
             }
         });
     }
-
-    // Tạo timeline
-    createTimeline();
     
-    // Theo dõi scroll
-    window.addEventListener('scroll', updateActiveTimeline);
-    updateActiveTimeline(); // Gọi lần đầu
-    
-    // Xử lý resize
-    window.addEventListener('resize', function() {
-        updateActiveTimeline();
+    let ticking = false;
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                updateActiveNav();
+                ticking = false;
+            });
+            ticking = true;
+        }
     });
+    
+    window.addEventListener('resize', function() {
+        updateActiveNav();
+    });
+    
+    setTimeout(updateActiveNav, 100);
+});
+
+// ===== RESPONSIVE FIXES =====
+function fixMobileLayout() {
+    const width = window.innerWidth;
+    
+    if (width <= 768) {
+        document.querySelectorAll('.corner-image, .polaroid-frame, .diagonal-image-item, .stack-item').forEach(el => {
+            if (el) el.style.transform = 'none';
+        });
+        
+        document.querySelectorAll('.polaroid-tape, .mini-polaroid, .decor-cam, .decor-star').forEach(el => {
+            if (el) el.style.display = 'none';
+        });
+    } else {
+        document.querySelectorAll('.polaroid-tape, .mini-polaroid, .decor-cam, .decor-star').forEach(el => {
+            if (el) el.style.display = '';
+        });
+    }
+}
+
+// Chạy khi load và khi resize
+document.addEventListener('DOMContentLoaded', function() {
+    fixMobileLayout();
+    window.addEventListener('resize', fixMobileLayout);
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+});
+    // Chạy khi load và khi resize
+document.addEventListener('DOMContentLoaded', function() {
+    fixMobileLayout();
+    window.addEventListener('resize', fixMobileLayout);
+
+    // Fix smooth scroll cho mobile
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+});
+
+
+// ===== LOADING SCREEN WITH FADE IN EFFECT =====
+document.addEventListener('DOMContentLoaded', function() {
+    // Text chạy theo vòng tròn
+    const text = " OIZOIOICON NĂM LỚP 10 ";
+    const rotatingText = document.getElementById('rotatingText');
+    const loadingPercent = document.getElementById('loadingPercent');
+    const loadingBarFill = document.getElementById('loadingBarFill');
+    const loadingScreen = document.getElementById('loadingScreen');
+    
+    // Tạo các chữ xoay tròn với hiệu ứng fade in
+    if (rotatingText) {
+        let html = '';
+        for (let i = 0; i < text.length; i++) {
+            html += `<i style="--i: ${i};">${text[i]}</i>`;
+        }
+        rotatingText.innerHTML = html;
+    }
+    
+    // Lấy tất cả các chữ để theo dõi
+    const letters = document.querySelectorAll('.text-circle span i');
+    
+    // Giả lập quá trình loading
+    let progress = 0;
+    const loadingTime = 3000; // 3 giây
+    const interval = 30; // Cập nhật mỗi 30ms
+    
+    const loadingInterval = setInterval(function() {
+        progress += (interval / loadingTime) * 100;
+        
+        // Kích hoạt hiệu ứng hoàn thành cho từng chữ dựa trên progress
+        if (letters.length > 0) {
+            const letterProgress = Math.floor((progress / 100) * letters.length);
+            
+            // Thêm class loaded cho các chữ đã hoàn thành
+            for (let i = 0; i < letterProgress; i++) {
+                if (i < letters.length && !letters[i].classList.contains('loaded')) {
+                    letters[i].classList.add('loaded');
+                }
+            }
+        }
+        
+        if (progress >= 100) {
+            progress = 100;
+            clearInterval(loadingInterval);
+            
+            // Đảm bảo tất cả chữ đều có class loaded
+            letters.forEach(letter => {
+                letter.classList.add('loaded');
+            });
+            
+            // ẨN MÀN HÌNH LOADING (không xóa text)
+            setTimeout(function() {
+                loadingScreen.classList.add('hidden');
+                
+                // Cho phép scroll
+                document.body.style.overflow = '';
+                
+                // Bắt đầu các animation khác
+                startMainAnimations();
+                
+                // VẪN GIỮ LẠI TEXT - không xóa
+                // Các chữ vẫn hiển thị trên màn hình loading đang fade out
+                
+            }, 800);
+        }
+        
+        // Cập nhật phần trăm và thanh loading
+        if (loadingPercent) {
+            loadingPercent.textContent = Math.floor(progress);
+        }
+        
+        if (loadingBarFill) {
+            loadingBarFill.style.width = progress + '%';
+        }
+        
+    }, interval);
+    
+    // Không cho scroll khi đang loading
+    document.body.style.overflow = 'hidden';
+    
+    // Hàm bắt đầu các animation chính sau loading
+    function startMainAnimations() {
+        // Kích hoạt các observer
+        const quoteSection = document.querySelector('.quote-section');
+        if (quoteSection) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        quoteSection.classList.add('visible');
+                    }
+                });
+            });
+            observer.observe(quoteSection);
+        }
+        
+        // Kích hoạt các scroll reveal
+        const reveals = document.querySelectorAll('.scroll-reveal');
+        reveals.forEach(el => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            });
+            observer.observe(el);
+        });
+    }
+});
+
+// ===== ENDING NOTIFICATION =====
+document.addEventListener('DOMContentLoaded', function() {
+    const endingNotification = document.getElementById('endingNotification');
+    const endingCloseBtn = document.getElementById('endingCloseBtn');
+    const finalSection = document.getElementById('final-memory-strip-section');
+    
+    // Biến để kiểm tra đã hiện thông báo chưa
+    let hasShownEnding = false;
+    
+    // Hàm hiển thị thông báo kết thúc
+    function showEndingNotification() {
+        if (!hasShownEnding && endingNotification) {
+            endingNotification.classList.add('show');
+            hasShownEnding = true;
+            
+            // Tạo hiệu ứng âm thầm (có thể thay bằng hiệu ứng khác)
+            createConfetti();
+            
+            // Tự động cuộn lên một chút để thấy thông báo rõ hơn
+            setTimeout(() => {
+                endingNotification.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+            }, 300);
+        }
+    }
+    
+    // Hàm tạo hiệu ứng confetti đơn giản
+    function createConfetti() {
+        for (let i = 0; i < 50; i++) {
+            setTimeout(() => {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: fixed;
+                    left: ${Math.random() * 100}%;
+                    top: -20px;
+                    width: 10px;
+                    height: 20px;
+                    background: hsl(${Math.random() * 360}, 100%, 50%);
+                    border-radius: 3px;
+                    z-index: 100001;
+                    animation: confettiFall 3s linear forwards;
+                    pointer-events: none;
+                `;
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 3000);
+            }, i * 50);
+        }
+    }
+    
+    // Theo dõi khi người dùng cuộn đến phần cuối
+    function checkEndingSection() {
+        if (hasShownEnding || !finalSection) return;
+        
+        const rect = finalSection.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // Kiểm tra nếu đã cuộn qua 70% của section cuối
+        if (rect.top < windowHeight * 0.9 && rect.bottom > 0) {
+            showEndingNotification();
+        }
+    }
+    
+    // Thêm event listener cho scroll
+    window.addEventListener('scroll', function() {
+        // Dùng requestAnimationFrame để tối ưu performance
+        if (!hasShownEnding) {
+            window.requestAnimationFrame(checkEndingSection);
+        }
+    });
+    
+    // Nút đóng thông báo
+    if (endingCloseBtn) {
+        endingCloseBtn.addEventListener('click', function() {
+            endingNotification.classList.remove('show');
+            
+            // Cuộn lên đầu trang để xem lại
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+    
+    // Click bên ngoài để đóng (tùy chọn)
+    if (endingNotification) {
+        endingNotification.addEventListener('click', function(e) {
+            if (e.target === endingNotification) {
+                endingNotification.classList.remove('show');
+            }
+        });
+    }
+    
+    // Kiểm tra ngay khi load (nếu đã ở cuối trang)
+    setTimeout(checkEndingSection, 1000);
+    
+    // Thêm keyframes cho confetti nếu chưa có
+    if (!document.querySelector('#ending-keyframes')) {
+        const style = document.createElement('style');
+        style.id = 'ending-keyframes';
+        style.textContent = `
+            @keyframes confettiFall {
+                0% {
+                    transform: translateY(0) rotate(0deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(100vh) rotate(720deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
 });

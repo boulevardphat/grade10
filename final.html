@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Kỷ Niệm Lớp Học - Hành trình đáng nhớ</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Font dự phòng nếu Caveat không tải được -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <script src="javascript.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Lexend:wght@700;900&display=swap" rel="stylesheet"> 
+</head>
+<body>
+    <!-- LOADING SCREEN -->
+<div class="loading-screen" id="loadingScreen">
+    <div class="loader-container">
+        <!-- Vòng tròn quay chứa ảnh -->
+        <div class="circle-loader">
+            <img src="lop10/anh/logo.jpg" alt="Logo" class="circle-image" 
+                 onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'200\' height=\'200\' viewBox=\'0 0 200 200\'><circle cx=\'100\' cy=\'100\' r=\'90\' fill=\'%23ffd700\'/><text x=\'50\' y=\'120\' fill=\'white\' font-size=\'40\' font-family=\'Arial\'>10A2</text></svg>'">
+        </div>
+        
+        <!-- Vòng tròn chứa text chạy -->
+        <div class="text-circle">
+            <span id="rotatingText"></span>
+        </div>
+        
+        <!-- Phần trăm loading -->
+        <div class="loading-progress">
+            <span id="loadingPercent">0</span>%
+        </div>
+        
+        <!-- Thanh loading -->
+        <div class="loading-bar">
+            <div class="loading-bar-fill" id="loadingBarFill"></div>
+        </div>
+    </div>
+</div>
+
+       <!-- HEADER -->
+    <header class="site-header">
+        <a href="#" class="header-logo">
+            <img src="lop10/anh/logo.png" alt="Logo 12A2" class="header-logo-img" onerror="this.style.display='none'; this.parentElement.innerHTML='12A2<span>K28</span>';">
+        </a>
+        <nav class="main-nav">
+            <a href="#" class="nav-link active">Lớp 10</a>
+            <a href="#" class="nav-link">Lớp 11</a>
+            <a href="#" class="nav-link">Lớp 12</a>
+            <a href="#" class="nav-link">Thành Viên</a>
+            <a href="#" class="nav-link">Giáo Viên</a>
+        </nav> 
+    </header>
+    <!-- PHẦN 1: FULL ẢNH -->
+    <div class="fullscreen-image-container" id="fullscreen-image-container">
+        <img src="lop10/anh/khaigiang.png" alt="Khai giảng" class="fullscreen-image" id="main-image">
+        
+        <div class="image-controls">
+            <button class="control-btn" id="prev-btn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="image-counter">
+                <span id="current-img">1</span> / <span id="total-imgs">4</span>
+            </div>
+            <button class="control-btn" id="next-btn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        
+        <div class="scroll-hint">
+        </div>
+    </div>
+
+    <!-- PHẦN 2: QUOTE -->
+    <section class="quote-section" id="quote-section">
+        <div class="quote-container">
+            <div class="star-decoration star-top"></div>
+            <div class="star-decoration star-bottom"></div>
+            <div class="quote-text">
+                <div class="quote-line line1">
+                    <span class="word">"WE</span>
+                    <span class="word">ARE</span>
+                    <span class="word">THE</span>
+                    <span class="word">BEST,</span>
+                </div>
+                <div class="quote-line line2">
+                    <span class="word">WE</span>
+                    <span class="word">LEARN,</span>
+                    <span class="word">WE</span>
+                    <span class="word">GROW,</span>
+                    <span class="word">WE</span>
+                    <span class="word">ACE</span>
+                    <span class="word">THE</span>
+                    <span class="word">TEST."</span>
+                </div>
+            </div>
+            <div class="description">
+                <p class="description-text">
+                    Câu nói ngày khai giảng ấy dường như đã trở thành chiếc chìa khóa mở ra một hành trình mới đầy hứa hẹn và nhiệt huyết của tuổi trẻ chúng mình.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHẦN 3: POLAROID SECTION -->
+    <section class="polaroid-section" id="polaroid-section">
+        <div class="corner-images-container">
+            <div class="corner-image top-left">
+                <img src="lop10/anh/phunu1.jpeg" 
+                     alt="Góc trái trên" class="corner-img">
+            </div>
+            
+            <div class="corner-image top-right">
+                <img src="lop10/anh/phunu2.jpeg" 
+                     alt="Góc phải trên" class="corner-img">
+            </div>
+            
+            <div class="corner-image bottom-right">
+                <img src="lop10/anh/phunu5.jpeg" 
+                     alt="Góc phải dưới" class="corner-img">
+            </div>
+            
+            <div class="corner-image bottom-left polaroid-frame">
+                <div class="polaroid-inner">
+                    <div class="polaroid-image-area">
+                        <img src="lop10/anh/phunu3.png" 
+                             alt="Polaroid" class="polaroid-img">
+                    </div>
+                    <div class="polaroid-caption">
+                        <p>Khoảnh khắc đáng nhớ</p>
+                    </div>
+                </div>
+                <div class="polaroid-tape"></div>
+            </div>
+            
+            <div class="mini-polaroid">
+                <div class="mini-polaroid-inner">
+                    <div class="mini-polaroid-image">
+                        <img src="lop10/anh/phunu4.jpg" 
+                             alt="Polaroid nhỏ" class="mini-img">
+                    </div>
+                    <div class="mini-caption">
+                        <p>Kỷ niệm</p>
+                    </div>
+                </div>
+                <div class="mini-tape"></div>
+            </div>
+        </div> 
+        
+        <div class="content-text-container">
+            <div class="content-text">
+                <div class="date-header">
+                    <h1 class="date-number">20/10</h1>
+                    <div class="date-subtitle">
+                        <p>Tưởng chừng ngày hôm đó </p>
+                        <p>Sẽ trôi qua không có điều gì</p>
+                    </div>
+                    <div class="divider-line"></div>
+                </div>
+
+                <div class="diary-title-no-frame">
+                    <h2 class="title-text-no-frame">
+                        Thì .... 
+                        <span class="title-subtext-inline">vào tiết tiếng Anh của cô Liên</span>
+                    </h2>
+                </div>
+                <div class="diary-body">
+                    <p class="diary-paragraph">
+                        khi cả lớp vẫn đang học bài như bình thường thì bất ngờ các bạn nam mang một chiếc bánh kem cùng những viên kẹo ngọt ngào bước vào lớp.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="message-section">
+            <div class="speech-bubble">
+                <p>Ồồ</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHẦN 4: JOURNAL WRAPPER 2010 -->
+    <section class="journal-wrapper" id="journal-wrapper"> 
+        <div class="journal-container-2010">
+            <div class="journal-main-section">
+                <div class="j-image-large-wrapper scroll-reveal">
+                   <div class="ja-image-large">
+    <img src="lop10/anh/phunu6.jpeg" alt="20/10 kỷ niệm"></div>
+                </div>
+
+                <div class="j-right-column">
+                    <div class="j-image-small-top-wrapper scroll-reveal">
+                        <div class="ja-image-small-top">
+    <img src="lop10/anh/phunu7.jpeg" alt="Ngọt ngào">
+</div>
+                    </div>
+
+                    <div class="j-text-box-middle scroll-reveal">
+                        <p>
+                            <i class="fas fa-feather"></i>
+                            <span class="j-emph">"Không khí lớp học"</span> bỗng trở nên rộn ràng, tràn ngập tiếng cười.
+                        </p>
+                        <p>
+                            <i class="fas fa-cake-candles"></i>
+                            Dù chỉ là bánh kem và kẹo nhỏ, nhưng sự chuẩn bị chu đáo...
+                        </p>
+                    </div>
+
+                    <div class="j-image-small-bottom-wrapper scroll-reveal">
+                       <div class="ja-image-small-bottom">
+    <img src="lop10/anh/phunu8.jpeg" alt="Đáng nhớ">
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="j-bottom-text scroll-reveal">
+                <p>
+                    <i class="fas fa-sparkle"></i>
+                    ...và tình cảm chân thành của các bạn nam đã khiến ngày 20/10 năm ấy trở nên thật ấm áp. 🌷
+                </p>
+                <div class="j-quote-source">
+                    <i class="fas fa-feather"></i> Kỷ niệm đẹp nhất là khi ta dành cho nhau những điều giản dị
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHẦN 5: JOURNAL SECTION 20/11 -->
+    <section class="journal-section" id="journal-section">
+        <div class="journal-container fade-in-up">
+            <div class="journal-header">
+                <h2 class="journal-title">Dịp lễ 20/11 năm ấy là một trong những dấu mốc đáng nhớ đầu tiên của tập thể lớp 10A2</h2>
+                <div class="header-line">
+                    <span class="dot red"></span>
+                    <span class="dot orange"></span>
+                    <span class="dot green"></span>
+                </div>
+            </div>
+
+            <div class="journal-content-grid">
+                <div class="main-photo-wrapper">
+                    <img src="lop10/anh/gdth1.jpg" alt="Kỷ niệm 20/11" class="main-photo">
+                </div>
+
+                <div class="side-photos-column">
+                    <div class="small-photo-wrapper">
+                        <img src="lop10/anh/gdth2.jpg" alt="Ảnh nhỏ 1" class="small-photo">
+                    </div>
+                    <div class="small-photo-wrapper">
+                        <img src="lop10/anh/gdth3.jpg" alt="Ảnh nhỏ 2" class="small-photo">
+                    </div>
+                    <div class="small-photo-wrapper">
+                        <img src="lop10/anh/gdth4.jpg" alt="Ảnh nhỏ 3" class="small-photo">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="double-hearts">💕</div>
+        </div>
+    </section>
+
+    <!-- PHẦN 6: BACKSTAGE SECTION -->
+    <section class="backstage-container section-fade" id="backstage-section">
+        <div class="backstage-content">
+            <div class="backstage-text">
+                <h1 class="backstage-title">HẬU TRƯỜNG <br> "VUI NHỘN"</h1>
+                <p class="backstage-desc">
+                    Sau nhiều tuần tập luyện miệt mài, lớp chúng mình đã tự tin tham gia đêm chung kết chương trình văn nghệ “Giai điệu tuổi hồng”
+                </p>
+            </div>
+
+            <div class="backstage-gallery">
+                <div class="film-strip">
+                    <div class="photo-grid">
+                        <div class="photo-box"><img src="lop10/anh/fun1.png" alt="Photo 1"></div>
+                        <div class="photo-box"><img src="lop10/anh/fun2.jpg" alt="Photo 2"></div>
+                        <div class="photo-box"><img src="lop10/anh/fun3.jpg" alt="Photo 3"></div>
+                        <div class="photo-box"><img src="lop10/anh/fun4.png" alt="Photo 4"></div>
+                    </div>
+                    <div class="decor-cam">📸</div>
+                    <div class="decor-star">⭐⭐⭐</div>
+                </div>
+            </div>
+        </div>
+    </section> 
+
+    <!-- PHẦN 7: BÀI CA TÔM CÁ -->
+    <section class="new-layout-section section-fade" id="media-section">
+        <div class="layout-container">
+            <div class="layout-left">
+                <div class="video-wrapper-v2">
+                    <video id="myVideo" controls poster="https://via.placeholder.com/600x800/e58cb3/ffffff?text=Thumbnail+Video">
+                        <source src="lop10/anh/bctc.mp4" type="video/mp4">
+                        Trình duyệt của bạn không hỗ trợ video.
+                    </video>
+                </div>
+            </div>
+
+            <div class="layout-right">
+                <div class="text-content">
+                    <h1 class="pink-title">BÀI CA <br> TÔM CÁ</h1>
+                    <p class="desc-text">
+                        Nói về cuộc sống lao động cơ cực nhưng đầy niềm vui của cư dân làng chài Việt Nam
+                    </p>
+                </div>
+
+                <div class="image-wrapper-v2">
+                    <img src="lop10/anh/bctc.jpg" alt="Hậu trường">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PHẦN 8: GIẢI III - PHẦN MỚI NHẤT (HIỂN THỊ SAU CÙNG) -->
+    <section class="new-layout-section section-fade" id="final-award-section">
+        <div class="container">
+            <div class="columns">
+                <!-- CỘT TRÁI: VĂN BẢN -->
+                <div class="text-col">
+                    <div class="red-title">
+                        VÀ XUẤT XẮC GIÀNH ĐƯỢC GIẢI III NĂM ĐÓ
+                    </div>
+                    <div class="description2011">
+                        <span class="big-quote">❝</span>
+                        <p style="margin-top: 8px;">Dù còn nhiều bỡ ngỡ, tiết mục ấy đã trở thành minh chứng rõ ràng cho sự đồng lòng và đoàn kết của tập thể lớp.</p>
+                    </div>
+                </div>
+
+                <!-- CỘT PHẢI: ẢNH 2x2 VÀ BUBBLE (XUẤT PHÁT TỪ ẢNH SỐ 3) -->
+                <div class="media-col">
+                    <!-- Grid 4 ảnh 2 hàng, 2 cột -->
+                    <div class="grid-2x2">
+                       <div class="photo-frame">
+                        <img src="lop10/anh/after.jpg" alt="Ảnh kỷ niệm 1">
+                    </div>
+                    <div class="photo-frame">
+                        <img src="lop10/anh/after2.jpg" alt="Ảnh kỷ niệm 2">
+                    </div>
+                    <div class="photo-frame" id="photo3">
+                        <img src="lop10/anh/after3.png" alt="Ảnh kỷ niệm 3">
+                    </div>
+                    <div class="photo-frame">
+                        <img src="lop10/anh/after4.jpg" alt="Ảnh kỷ niệm 4">
+                    </div>
+                </div>
+                    <!-- HỘP THOẠI nằm dưới, đuôi trỏ về phía ảnh số 3 -->
+                    <div class="bubble-section">
+                        <div class="speech-bubble">
+                            💬 “Tui biên đạo đó!”<br>
+                            <span style="font-size: 0.85rem; opacity: 0.75;">— Hà Linh * from A2 with luv —</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- PHẦN 9: THANH LỊCH - CẬP ĐỔI NAM THÀNH NỮ TỪ ĐẦU TIÊN CỦA LỚP -->
+<section class="thanhlich-section" id="thanhlich-section" style="display: block; visibility: visible; opacity: 1; min-height: 100vh;">
+    <div class="thanhlich-container">
+        <!-- Dòng chữ nhỏ phía trên -->
+        <div class="thanhlich-subtitle">Cặp đôi nam thanh nữ tú đầu tiên của lớp</div>
+        
+        <!-- Tiêu đề chính -->
+        <h1 class="thanhlich-title">THANH LỊCH</h1>
+        
+        <!-- Năm -->
+        <div class="thanhlich-year">2023 - 2024</div>
+        
+        <!-- Phần nội dung với bố cục text bên phải, ảnh bên trái -->
+        <div class="thanhlich-content">
+            <!-- Cột trái - Ảnh lớn -->
+            <div class="thanhlich-left">
+                <div class="image-frame">
+                    <img src="lop10/anh/tl1.png" 
+                         alt="Thanh lịch" 
+                         class="thanhlich-main-image"
+                         onerror="this.src='https://via.placeholder.com/800x1000/4a90e2/ffffff?text=Anh+Chinh'">
+                </div>
+            </div>
+            
+            <!-- Cột phải - Text và ảnh nhỏ -->
+            <div class="thanhlich-right">
+                <!-- Khung text -->
+                <div class="thanhlich-text-box">
+                    <p class="thanhlich-quote">“</p>
+                    <p class="thanhlich-description">
+                        Bên cạnh cuộc thi văn nghệ, lớp mình còn tham gia cuộc thi Thanh Lịch với hai đại diện là bạn Diệp Ngân và Minh Triết
+                    </p>
+                    <p class="thanhlich-description">
+                        Từ những buổi chụp ảnh đôi đến phần trình diễn thời trang trong đêm chung kết, hai bạn đã để lại nhiều ấn tượng đẹp và đại diện 10A2 tỏa sáng rực rỡ trên sân khấu 
+                    </p>
+                
+                </div>
+                
+                <!-- GRID ẢNH NHỎ 2x2 -->
+                <div class="elegant-grid">
+                    <div class="elegant-grid-item">
+                        <img src="lop10/anh/dn.png" 
+                             alt="Thanh lịch 2"
+                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23b8d7f0\'/><text x=\'20\' y=\'55\' fill=\'%231f6ea0\' font-size=\'12\' font-family=\'Arial\'>Ảnh 2</text></svg>'">
+                    </div>
+                    <div class="elegant-grid-item">
+                        <img src="lop10/anh/tl3.png" 
+                             alt="Thanh lịch 3"
+                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23b8d7f0\'/><text x=\'20\' y=\'55\' fill=\'%231f6ea0\' font-size=\'12\' font-family=\'Arial\'>Ảnh 3</text></svg>'">
+                    </div>
+                    <div class="elegant-grid-item">
+                        <img src="lop10/anh/tl2.png" 
+                             alt="Thanh lịch 4"
+                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23b8d7f0\'/><text x=\'20\' y=\'55\' fill=\'%231f6ea0\' font-size=\'12\' font-family=\'Arial\'>Ảnh 4</text></svg>'">
+                    </div>
+                    <div class="elegant-grid-item">
+                        <img src="lop10/anh/mt.png" 
+                             alt="Thanh lịch 5"
+                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23b8d7f0\'/><text x=\'20\' y=\'55\' fill=\'%231f6ea0\' font-size=\'12\' font-family=\'Arial\'>Ảnh 5</text></svg>'">
+                    </div>
+                </div>
+                  <!-- DẤU ẤN THỜI GIAN -->
+                <div class="elegant-signature">
+                    <span class="signature-icon">💫☀️🌙✨</span>
+                    <span class="signature-text">Công chúa mặt trăng và hoàng tử mặt trời của chúng tớ</span>
+                    <span class="signature-icon">💫☀️🌙✨</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+
+<!-- PHẦN 11: HẬU TRƯỜNG - DEADLINE BÙ ĐẦU -->
+<section class="hau-truong-section" id="hau-truong-section">
+    <div class="hau-truong-container">
+        <!-- Tiêu đề chính -->
+        <h1 class="hau-truong-title"># HẬU TRƯỜNG</h1>
+        
+        <!-- Nội dung mô tả -->
+        <p class="hau-truong-description">
+            Nơi ghi lại những khoảnh khắc chạy <span class="highlight">"DEADLINE"</span> bù đầu
+        </p>
+        
+        <!-- Dòng chữ phụ -->
+        <p class="hau-truong-sub">
+            Nhưng vẫn rất chill, ahihi 😁
+        </p>
+        
+        <!-- Grid ảnh 2x2 -->
+        <div class="hau-truong-grid">
+            <div class="grid-item">
+                <img src="lop10/anh/ht1.png" 
+                     alt="Hậu trường 1"
+                     onerror="this.src='https://via.placeholder.com/600x600/4a90e2/ffffff?text=Anh+1'">
+ 
+            </div>
+            <div class="grid-item">
+                <img src="lop10/anh/ht2.png" 
+                     alt="Hậu trường 2"
+                     onerror="this.src='https://via.placeholder.com/600x600/4a90e2/ffffff?text=Anh+2'">
+            </div>
+            <div class="grid-item">
+                <img src="lop10/anh/ht3.png" 
+                     alt="Hậu trường 3"
+                     onerror="this.src='https://via.placeholder.com/600x600/4a90e2/ffffff?text=Anh+3'">
+
+            </div>
+            <div class="grid-item">
+                <img src="lop10/anh/ht4.png" 
+                     alt="Hậu trường 4"
+                     onerror="this.src='https://via.placeholder.com/600x600/4a90e2/ffffff?text=Anh+4'">
+
+            </div>
+        </div>
+            <div class="hau-truong-extra">
+            <div class="extra-item extra-left">
+                <img src="lop10/anh/ht5.png" 
+                     alt="Hậu trường 5"
+                     onerror="this.src='https://via.placeholder.com/800x500/4a90e2/ffffff?text=Anh+5'">
+                <div class="extra-caption">
+
+
+                </div>
+            </div>
+            <div class="extra-item extra-right">
+                <img src="lop10/anh/ht6.png" 
+                     alt="Hậu trường 6"
+                     onerror="this.src='https://via.placeholder.com/800x500/4a90e2/ffffff?text=Anh+6'">
+                <div class="extra-caption">
+
+
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sticker trang trí -->
+        <div class="decor-stickers">
+            <span class="sticker">☕</span>
+            <span class="sticker">💻</span>
+            <span class="sticker">😴</span>
+            <span class="sticker">⚡</span>
+        </div>
+    </div>
+</section>
+
+<!-- PHẦN 12: CHUYẾN ĐI TRẢI NGHIỆM YAKULT & AEON MALL -->
+<section class="traidinh-section" id="traidinh-section">
+    <div class="traidinh-container">
+        <!-- Tiêu đề chính với dải màu #f26d6f -->
+        <div class="title-wrapper">
+            <div class="color-strip"></div>
+            <h1 class="traidinh-title">
+                <span class="title-line">Chuyến đi trải nghiệm</span>
+                <span class="title-line highlight">ở Yakult và AEON MALL</span>
+            </h1>
+        </div>
+        
+        <!-- Nội dung chính - 3 CỘT -->
+        <div class="traidinh-content">
+            <!-- CỘT TRÁI: TEXT TRÊN - ẢNH DƯỚI -->
+            <div class="traidinh-col left-col">
+                <div class="text-above">
+                    <div class="text-card">
+                        <div class="pin-decoration card-pin"></div>
+                        <p class="card-text">
+                            <span class="text-highlight">Nhà máy Yakult</span> hiện đại với dây chuyền sản xuất khép kín theo tiêu chuẩn Nhật Bản.
+                        </p>
+                        <div class="card-icon">🏭</div>
+                    </div>
+                </div>
+                
+                <div class="image-below">
+                    <div class="polaroid-frame small-frame">
+                        <div class="washi-tape tape-blue tape-1"></div>
+                        <div class="polaroid-image">
+                            <img src="lop10/anh/in1.jpg" 
+                                 alt="Nhà máy Yakult"
+                                 onerror="this.src='https://via.placeholder.com/600x600/ffb6c1/f26d6f?text=Yakult'">
+                        </div>
+                        <div class="polaroid-caption">
+                            <span class="caption-icon">🏭</span>
+                            <span class="caption-text">Tham quan nhà máy</span>
+                        </div>
+                        <div class="washi-tape tape-pink tape-2"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CỘT GIỮA (LỚN HƠN): ẢNH NGANG TRÊN - TEXT DƯỚI -->
+            <div class="traidinh-col middle-col">
+                <div class="image-above">
+                    <div class="horizontal-frame">
+                        <div class="washi-tape horizontal-tape-1"></div>
+                        <div class="washi-tape horizontal-tape-2"></div>
+                        <div class="pin-decoration horizontal-pin"></div>
+                        <img src="lop10/anh/in.jpg" 
+                             alt="AEON MALL toàn cảnh"
+                             class="horizontal-image"
+                             onerror="this.src='https://via.placeholder.com/800x600/f26d6f/ffffff?text=AEON+MALL'">
+                        <div class="image-badge">
+                            <span class="badge-icon">🏬</span>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-below">
+                    <div class="text-card large-card">
+                        <div class="pin-decoration card-pin-right"></div>
+                        <p class="card-text large-text">
+                            và trải nghiệm văn hóa Nhật Bản ngay giữa lòng thành phố. 
+                            Chúng mình đã có những giờ phút thư giãn thú vị sau chuyến tham quan nhà máy.
+                        </p>
+                      
+                        <div class="sticker-group">
+                            <span class="mini-sticker">🎌</span>
+                            <span class="mini-sticker">🇯🇵</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CỘT PHẢI: TEXT TRÊN - ẢNH DƯỚI -->
+            <div class="traidinh-col right-col">
+                <div class="text-above">
+                    <div class="text-card">
+                        <div class="pin-decoration card-pin"></div>
+                        <p class="card-text">
+                            <span class="text-highlight">Dây chuyền sản xuất</span> hiện đại với công nghệ tiên tiến, đảm bảo vệ sinh an toàn thực phẩm.
+                        </p>
+                        <div class="card-icon">⚙️</div>
+                    </div>
+                </div>
+                
+                <div class="image-below">
+                    <div class="polaroid-frame small-frame">
+                        <div class="washi-tape tape-green tape-3"></div>
+                        <div class="polaroid-image">
+                            <img src="lop10/anh/in2.jpg" 
+                                 alt="Dây chuyền sản xuất">
+                        </div>
+                        <div class="polaroid-caption">
+                            <span class="caption-icon">🔬</span>
+                            <span class="caption-text">Quy trình khép kín</span>
+                        </div>
+                        <div class="washi-tape tape-yellow tape-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    
+    </div>
+</section>
+
+<!-- PHẦN 14: KỶ NIỆM AEON MALL - ẢNH LỚN VÀ 4 ẢNH NHỎ XẾP DỌC -->
+<section class="memory-section" id="memory-section">
+    <div class="memory-container">
+        <!-- CỘT TRÁI - ẢNH LỚN NGANG VÀ TEXT NOTE -->
+        <div class="memory-left">
+            <!-- Ảnh lớn ngang -->
+            <div class="large-photo-wrapper">
+                <div class="large-polaroid">
+                    <div class="washi-tape large-tape-1"></div>
+                    <div class="washi-tape large-tape-2"></div>
+                    <div class="pin-decoration large-pin"></div>
+                    <img src="lop10/anh/hall.jpg" 
+                         alt="AEON Mall toàn cảnh"
+                         class="large-image"
+                         onerror="this.src='https://via.placeholder.com/800x500/f26d6f/ffffff?text=AEON+MALL'">
+                    <div class="polaroid-caption large-caption">
+                        <span class="caption-icon">🏬</span>
+                        <span class="caption-text">Check-in ở sảnh Yakult nè</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tờ giấy note phía dưới ảnh lớn -->
+            <div class="note-wrapper">
+                <div class="paper-note">
+                    <div class="note-pin"></div>
+                    <p class="note-text">
+                        Sau khi kết thúc buổi trải nghiệm, lớp mình tiếp tục di chuyển đến Aeon Mall để tự do vui chơi và thư giãn. Những hoạt động đơn giản của chuyến đi trải nghiệm thực sự là dịp để các thành viên trong lớp thêm gắn bó, hiểu nhau hơn, từ đó để lại nhiều kỉ niệm khó quên trong những năm cấp 3 dưới mái trường chuyên.
+                    </p>
+                    <div class="note-corner"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CỘT PHẢI - 4 ẢNH NHỎ XẾP DỌC ĐAN XEN -->
+        <div class="memory-right">
+            <div class="stacked-vertical">
+                <!-- Ảnh 1 - Trên cùng -->
+                <div class="stack-item vert-1">
+                    <div class="small-polaroid">
+                        <div class="pin-decoration stack-pin-1"></div>
+                        <img src="lop10/anh/yk.png" 
+                             alt="Vui chơi"
+                             class="stack-img"
+                             onerror="this.src='https://via.placeholder.com/400x400/ff9eb5/f26d6f?text=Vui+Choi'">
+
+                        <div class="washi-tape stack-tape-1"></div>
+                    </div>
+                </div>
+                
+                <!-- Ảnh 2 - Thứ hai, lệch phải -->
+                <div class="stack-item vert-2">
+                    <div class="small-polaroid">
+                        <div class="pin-decoration stack-pin-2"></div>
+                        <img src="lop10/anh/yk1.jpg" 
+                             alt="Thư giãn"
+                             class="stack-img"
+                             onerror="this.src='https://via.placeholder.com/400x400/ff8da1/f26d6f?text=Thu+Gian'">
+                        <div class="stack-caption">🍦 Những phút thư giãn</div>
+                        <div class="washi-tape stack-tape-2"></div>
+                    </div>
+                </div>
+                
+                <!-- Ảnh 3 - Thứ ba, lệch trái -->
+                <div class="stack-item vert-3">
+                    <div class="small-polaroid">
+                        <div class="pin-decoration stack-pin-3"></div>
+                        <img src="lop10/anh/yk2.png" 
+                             alt="Kỷ niệm"
+                             class="stack-img"
+                             onerror="this.src='https://via.placeholder.com/400x400/ffb6c1/f26d6f?text=Ky+Niem'">
+                        <div class="stack-caption">📸 Khoảnh khắc đáng nhớ</div>
+                        <div class="washi-tape stack-tape-3"></div>
+                    </div>
+                </div>
+                
+                <!-- Ảnh 4 - Dưới cùng, lệch phải -->
+                <div class="stack-item vert-4">
+                    <div class="small-polaroid">
+                        <div class="pin-decoration stack-pin-4"></div>
+                        <img src="lop10/anh/yk3.jpg" 
+                             alt="Nhóm bạn"
+                             class="stack-img"
+                             onerror="this.src='https://via.placeholder.com/400x400/ff9eb5/f26d6f?text=Nhom+Ban'">
+
+                        <div class="washi-tape stack-tape-4"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Trang trí thêm -->
+            <div class="decorative-dots"></div>
+        </div>
+    </div>
+</section>
+
+
+<!-- PHẦN 15: MOMENT CẬN TẾT - VƯỜN THƯỢNG UYỂN -->
+<section class="tet-section" id="tet-section">
+    <div class="tet-container">
+        <!-- Tiêu đề chính -->
+        <h1 class="tet-title">“MOMENT CẬN TẾT”</h1>
+        
+        <!-- Nội dung mô tả -->
+        <p class="tet-description">
+            Gần Tết là thời điểm cả lớp chúng mình được nhà trường phân công xuống chăm sóc sản vườn, 
+            nơi chúng mình hay gọi vui là <span class="highlight">"vườn thượng uyển"</span>
+        </p>
+    </div>
+</section>
+
+<!-- PHẦN COLLAGE GRID - Tất cả 34 ảnh (đặt riêng biệt, không nằm trong tet-section) -->
+<div class="image-strip-container">
+        <img src="lop10/anh/ct.png" alt="Kỷ niệm ">
+        <img src="lop10/anh/ct1.png" alt="Kỷ niệm 1">
+        <img src="lop10/anh/ct2.png" alt="Kỷ niệm 2">
+        <img src="lop10/anh/ct3.png" alt="Kỷ niệm 3">
+        <img src="lop10/anh/ct4.png" alt="Kỷ niệm 4">
+        <img src="lop10/anh/ct5.png" alt="Kỷ niệm 5">
+        <img src="lop10/anh/ct6.png" alt="Kỷ niệm 6">
+    </div>
+
+    <!-- Modal Popup -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+        <button class="modal-close" id="modalClose">✕</button>
+        <img class="modal-image" id="modalImage" src="" alt="">
+        <div class="modal-info">
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <p class="modal-description" id="modalDescription"></p>
+        </div>
+    </div>
+</div>
+
+
+<!-- PHẦN 16: KỶ NIỆM 8/3 & LỄ HỘI VĂN HÓA -->
+<section class="cultural-section" id="cultural-section">
+    <div class="cultural-container">
+        <!-- PHẦN 8/3 -->
+        <div class="cultural-march-section">
+            <div class="section-header">
+                <h2>8/3</h2>
+                <div class="sub-title">Ngày của những bông hoa và nụ cười</div>
+            </div>
+            
+            <div class="cultural-grid-1">
+                <!-- Cột trái - Ảnh lớn 1 -->
+                <div class="cultural-left-large">
+                    <div class="image-badge-march">🌸 8/3 🌸</div>
+                    <div class="cultural-image-large">
+                        <img src="lop10/anh/nu.png" 
+                             alt="Kỷ niệm 8/3 - Ảnh lớn 1"
+                             onerror="this.src='https://via.placeholder.com/800x600/ff69b4/ffffff?text=8%2F3+2024'">
+                    </div>
+                    <div class="cultural-text-box">
+                        <p>Chỉ vài tuần sau Tết, khi những cây mai bắt đầu nhường chỗ cho sắc xuân mới cũng là lúc ngày 8/3 tới. Ở cái tuổi lớp 10, các bạn nam vẫn còn chút gì đó ngây ngô nhưng lại rất chân thành.</p>
+                    </div>
+                </div>
+                
+                <!-- Cột phải - 2 ảnh nhỏ và text -->
+                <div class="cultural-right-small">
+                    <div class="cultural-small-images">
+                        <div class="cultural-image-small">
+                            <img src="lop10/anh/nu1.png" 
+                                 alt="Ảnh nhỏ 1"
+                                 onerror="this.src='https://via.placeholder.com/400x400/ff85c0/ffffff?text=Anh+1'">
+                        </div>
+                        <div class="cultural-image-small">
+                            <img src="lop10/anh/thu.jpeg" 
+                                 alt="Ảnh nhỏ 2"
+                                 onerror="this.src='https://via.placeholder.com/400x400/ff9ec0/ffffff?text=Anh+2'">
+                        </div>
+                        <div class="cultural-image-small">
+                            <img src="lop10/anh/thu1.jpeg" 
+                                 alt="Ảnh nhỏ 3"
+                                 onerror="this.src='https://via.placeholder.com/400x400/ffb6c1/ffffff?text=Anh+3'">
+                        </div>
+                        <div class="cultural-image-small">
+                            <img src="lop10/anh/thu2.jpeg" 
+                                 alt="Ảnh nhỏ 4"
+                                 onerror="this.src='https://via.placeholder.com/400x400/ffc0cb/ffffff?text=Anh+4'">
+                        </div>
+                    </div>
+                    
+                    <div class="cultural-text-box">
+                        <p>Mình vẫn nhớ hình ảnh các bạn nam, vốn bình thường rất tinh nghịch, bỗng nhiên trở nên chỉn chu và trang trọng lạ thường. Món quà năm ấy lại là một chiếc bánh kem và những lời chúc được chuẩn bị kỹ lưỡng cho riêng từng bạn nữ.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PHẦN LỄ HỘI VĂN HÓA -->
+        <div class="cultural-festival-section">
+            <div class="section-header">
+                <h2>LỄ HỘI VĂN HÓA</h2>
+            </div>
+            
+            <div class="cultural-grid-2">
+                <!-- Cột trái - Gian hàng Nhật Bản -->
+                <div class="cultural-left-column">
+                    <div class="cultural-booth">
+                        <div class="booth-header">
+                            <span class="booth-flag">🎌</span>
+                            <h3 class="booth-title">Gian hàng Nhật Bản</h3>
+                        </div>
+                        <div class="booth-image-large">
+                            <img src="lop10/anh/jp.png" 
+                                 alt="Gian hàng Nhật Bản"
+                                 onerror="this.src='https://via.placeholder.com/800x450/9370db/ffffff?text=Nhat+Ban'">
+                        </div>
+                        <div class="cultural-festival-text">
+                            <p>Gian hàng Nhật Bản với những chiếc đèn lồng lung linh, trang phục Yukata truyền thống và những món ăn đặc sắc như sushi, mochi. Các bạn nữ trong lớp diện áo dài, còn các bạn nam thì giới thiệu về văn hóa trà đạo Nhật Bản.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cột phải - Gian hàng Trung Quốc -->
+                <div class="cultural-right-column">
+                    <div class="cultural-booth booth-china">
+                        <div class="booth-header">
+
+                            <h3 class="booth-title">Gian hàng Trung Quốc</h3>
+                        </div>
+                        <div class="booth-image-duo">
+                            <div class="booth-image-main">
+                                <img src="lop10/anh/chinese1.png" 
+                                     alt="Gian hàng Trung Quốc - Ảnh lớn"
+                                     onerror="this.src='https://via.placeholder.com/800x600/e65c5c/ffffff?text=Trung+Quoc'">
+                            </div>
+                            <div class="booth-image-small">
+                                <img src="lop10/anh/chinese2.png" 
+                                     alt="Gian hàng Trung Quốc - Ảnh nhỏ"
+                                     onerror="this.src='https://via.placeholder.com/400x400/ff6b6b/ffffff?text=Chi+Tiet'">
+                            </div>
+                        </div>
+                        <div class="cultural-festival-text">
+                            <p>Gian hàng Trung Quốc gây ấn tượng với những chiếc đèn lồng đỏ, trang phục Hán phục truyền thống và trà đạo đặc sắc. Không gian được trang trí với những câu đối đỏ và chữ Phúc may mắn.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- PHẦN 17: TỔNG KẾT -->
+<section class="summary-section" id="summary-section">
+    <div class="summary-container">
+        <!-- Title -->
+        <div class="summary-title-wrapper">
+            <h1 class="summary-main-title">TỔNG KẾT</h1>
+            <div class="summary-subtitle">Hành trình 3 năm - Những dấu ấn không phai</div>
+        </div>
+        
+        <!-- Full Width Image -->
+        <div class="summary-hero-image scroll-reveal">
+            <img src="lop10/anh/tongket1.png" alt="Ảnh tập thể lớn">
+        </div>
+
+            <div class="summary-content-grid">
+            </div>
+        
+        <!-- Diagonal Layout với 2 ảnh xếp chéo và 2 text box lấp đầy -->
+        <div class="summary-diagonal-wrapper">
+            <!-- Left Side -->
+            <div class="summary-left-diagonal">
+                <!-- Ảnh trái xoay chéo -->
+                <div class="diagonal-image-item left">
+                    <div class="image-wrapper-v2"><img src="lop10/anh/tongket2.png" alt="Image"></div>
+                </div>
+                
+                <!-- Text box lấp đầy khoảng trống bên trái -->
+                <div class="summary-text-box left-text">
+                    <p>
+                        Từ những ngày đầu bỡ ngỡ bước vào lớp 10, chúng ta đã cùng nhau trải qua biết bao kỷ niệm: những buổi học nhóm, những lần tập văn nghệ, những chuyến đi chơi xa và cả những giờ phút ôn thi căng thẳng. Tất cả đã tạo nên một tập thể 10A2 đoàn kết và yêu thương.
+                    </p>
+                    <span class="text-emphasis">#10A2KỷNiệm</span>
+                </div>
+            </div>
+            
+            <!-- Right Side -->
+            <div class="summary-right-diagonal">
+                <!-- Ảnh phải xoay chéo -->
+                <div class="diagonal-image-item right">
+                    <div class="image-wrapper-v2"><img src="lop10/anh/tongket3.png" alt="Image"></div>
+                </div>
+                
+                <!-- Text box lấp đầy khoảng trống bên phải -->
+                <div class="summary-text-box right-text">
+                    <p>
+                        3 năm - không phải là khoảng thời gian quá dài nhưng đủ để chúng ta hiểu và gắn bó với nhau. Những tiếng cười, những giọt nước mắt, những lần giận hờn vu vơ rồi lại làm lành... Tất cả sẽ mãi là hành trang quý giá theo chúng ta suốt cuộc đời.
+                    </p>
+                    <span class="text-emphasis">#MãiNhớVềNhau</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Decorative Elements -->
+    <div class="summary-decoration"></div>
+    <div class="summary-dots"></div>
+</section>
+
+
+<!-- PHẦN 18: CLB - TẤT CẢ CÁC CÂU LẠC BỘ -->
+<section class="club-section" id="club-section">
+    <div class="club-container">
+        <!-- Header -->
+        <div class="club-header">
+            <h1 class="club-main-title">CLB</h1>
+            <div class="club-subtitle">
+                Suốt một năm qua, lớp 10A2 không chỉ nỗ lực trong học tập<br>
+                mà còn tích cực tham gia các câu lạc bộ, đội nhóm
+            </div>
+        </div>
+        
+        <!-- Clubs Grid -->
+        <div class="clubs-grid">
+            <!-- DorD - 4 ảnh (grid 2x2) -->
+            <div class="club-card dord">
+                <div class="club-card-header">
+                    <h3 class="club-name">DorD</h3>
+                    <span class="club-icon">🎭</span>
+                </div>
+                <div class="club-images grid-4">
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/dord1.png" alt="Image"></div>
+                    </div>
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/dord2.png" alt="Image"></div>
+                    </div>
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/dord3.png" alt="Image"></div>
+                    </div>
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/dord4.png" alt="Image"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- HVVC - 1 ảnh -->
+            <div class="club-card hvvc">
+                <div class="club-card-header">
+                    <h3 class="club-name">HVVC</h3>
+                    <span class="club-icon">🏐</span>
+                </div>
+                <div class="club-images grid-1">
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/hvvc.png" alt="Image"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- HVJC - 1 ảnh -->
+            <div class="club-card hvjcc">
+                <div class="club-card-header">
+                    <h3 class="club-name">HVJC</h3>
+                    <span class="club-icon">🎌</span>
+                </div>
+                <div class="club-images grid-1">
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/hvjc.jpg" alt="Image"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- HVOC - 1 ảnh -->
+            <div class="club-card hvoc">
+                <div class="club-card-header">
+                    <h3 class="club-name">HVOC</h3>
+                    <span class="club-icon">🧩</span>
+                </div>
+                <div class="club-images grid-1">
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/hvoc.jpg" alt="Image"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- HV PRESS - 1 ảnh -->
+            <div class="club-card hv-press">
+                <div class="club-card-header">
+                    <h3 class="club-name">HV PRESS</h3>
+                    <span class="club-icon">📰</span>
+                </div>
+                <div class="club-images grid-1">
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/bctt.png" alt="Image"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- HVEC - 1 ảnh -->
+            <div class="club-card hvec">
+                <div class="club-card-header">
+                    <h3 class="club-name">HVEC</h3>
+                    <span class="club-icon">💻</span>
+                </div>
+                <div class="club-images grid-1">
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/hvec.png" alt="Image"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TNTN - 4 ảnh (grid 2x2) -->
+            <div class="club-card tntn">
+                <div class="club-card-header">
+                    <h3 class="club-name">TNTN</h3>
+                    <span class="club-icon">🫂</span>
+                </div>
+                <div class="club-images grid-4">
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/tntn.png" alt="Image"></div>
+                    </div>
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/tntn1.png" alt="Image"></div>
+                    </div>
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/tntn2.png" alt="Image"></div>
+                    </div>
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/tntn3.png" alt="Image"></div>
+                    </div>
+                </div>
+            </div>
+            
+             <!-- HVFC - 2 ảnh xếp ngang -->
+            <div class="club-card hvvfc">
+                <div class="club-card-header">
+                    <h3 class="club-name">HVAFR</h3>
+                    <span class="club-icon">🎨 </span>
+                </div>
+                <div class="club-images grid-2-horizontal">
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/hva2.png" alt="Image"></div>
+                    </div>
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/hva.png" alt="Image"></div>
+                    </div>
+                </div>
+            </div>
+
+             <!-- THE CLEF - 2 ảnh xếp ngang -->
+            <div class="club-card hvvfc">
+                <div class="club-card-header">
+                    <h3 class="club-name">The Clef</h3>
+                    <span class="club-icon">🎨 </span>
+                </div>
+                <div class="club-images grid-2-horizontal">
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/clef.png" alt="Image"></div>
+                    </div>
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/clef1.png" alt="Image"></div>
+                    </div>
+                </div>
+            </div>
+
+                       <!-- SKDA - 2 ảnh xếp ngang -->
+            <div class="club-card skda">
+                <div class="club-card-header">
+                    <h3 class="club-name">SKDA</h3>
+                    <span class="club-icon">🎭</span>
+                </div>
+                <div class="club-images grid-2-horizontal">
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/sk.png" alt="Image"></div>
+                    </div>
+                    <div class="club-mini-image">
+                        <div class="image-wrapper-v2"><img src="lop10/anh/sk1.png" alt="Image"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Description Box - chiếm 2 cột -->
+            <div class="club-description">
+                <p>
+                    Mỗi CLB là một màu sắc riêng, là nơi chúng mình được thỏa sức đam mê, học hỏi và trưởng thành. Từ sân khấu DorD, sân cỏ HVVFC, nhạc viện HVOC đến những ấn phẩm của HV PRESS, tất cả đã tạo nên một bức tranh đa sắc màu cho tuổi học trò.
+                </p>
+                <span class="text-emphasis">#CLB10A2 #ĐamMêTuổiTrẻ</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Decoration -->
+    <div class="club-decoration"></div>
+</section>
+
+<!-- PHẦN 19: CÁC ĐỘI TUYỂN -->
+<section class="teams-section" id="teams-section">
+    <div class="teams-container">
+        <!-- Header -->
+        <div class="teams-header">
+            <h1 class="teams-main-title">ĐỘI TUYỂN</h1>
+        </div>
+        
+        <!-- Teams Grid - 4 cột -->
+        <div class="teams-grid">
+            <!-- Cột 1: Đội tuyển Anh (5 ảnh) -->
+            <div class="team-card">
+                <div class="team-card-header">
+                    <h3 class="team-name">Đội tuyển Anh</h3>
+                    <span class="team-icon">🇬🇧</span>
+                </div>
+                <div class="team-images-grid-5">
+                    <!-- Ảnh 1 - Lớn ngang -->
+                    <div class="polaroid-style">
+                        <div class="polaroid-image"><img src="lop10/anh/eng.png" alt="Image"></div>
+                    </div>
+                    <!-- Ảnh 2 - Vuông -->
+                    <div class="polaroid-style">
+                        <div class="polaroid-image"><img src="lop10/anh/eng1.png" alt="Image"></div>
+                    </div>
+                    <!-- Ảnh 3 - Vuông -->
+                    <div class="polaroid-style">
+                        <div class="polaroid-image"><img src="lop10/anh/eng2.png" alt="Image"></div>
+                    </div>
+                    <!-- Ảnh 4 - Vuông -->
+                    <div class="polaroid-style">
+                        <div class="polaroid-image"><img src="lop10/anh/eng3.png" alt="Image"></div>
+                    </div>
+                    <!-- Ảnh 5 - Lớn ngang -->
+                    <div class="polaroid-style">
+                        <div class="polaroid-image"><img src="lop10/anh/eng4.png" alt="Image"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cột 2: Đội tuyển Địa (2 ảnh) -->
+            <div class="team-card">
+                <div class="team-card-header">
+                    <h3 class="team-name">Đội tuyển Địa</h3>
+                    <span class="team-icon">🌍</span>
+                </div>
+                <div class="team-images-grid-2">
+                    <!-- Ảnh 1 -->
+                    <div class="polaroid-style">
+                        <div class="polaroid-image"><img src="lop10/anh/dia1.png" alt="Image"></div>
+                    </div>
+                    <!-- Ảnh 2 -->
+                    <div class="polaroid-style">
+                        <div class="polaroid-image"><img src="lop10/anh/dia2.png" alt="Image"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cột 3: Đội tuyển Toán (1 ảnh) -->
+            <div class="team-card">
+                <div class="team-card-header">
+                    <h3 class="team-name">Toán</h3>
+                    <span class="team-icon">🔢</span>
+                </div>
+                <div class="team-images-grid-1">
+                    <div class="polaroid-style">
+                        <div class="polaroid-image"><img src="lop10/anh/toan.png" alt="Image"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cột 4: Đội tuyển Bóng chuyền (1 ảnh dọc) -->
+            <div class="team-card">
+                <div class="team-card-header">
+                    <h3 class="team-name">Bóng chuyền</h3>
+                    <span class="team-icon">🏐</span>
+                </div>
+                <div class="team-images-grid-1-bc">
+                    <div class="polaroid-style">
+                        <div class="polaroid-image"><img src="lop10/anh/bc.png" alt="Image"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hàng 2: Đội tuyển Sử (6 ảnh) - chiếm cả 4 cột -->
+            <div class="team-card" style="grid-column: span 4;">
+                <div class="team-card-header">
+                    <h3 class="team-name">Đội tuyển Sử</h3>
+                    <span class="team-icon">📜</span>
+                </div>
+                <div class="team-images-grid-6">
+                    <!-- Ảnh 1 - Lớn vuông (chiếm 2 ô) -->
+                    <div class="polaroid-style">
+                        <div class="polaroid-image"><img src="lop10/anh/su.png" alt="Image"></div>
+                    </div>
+                    <!-- Ảnh 2 - Lớn ngang (chiếm 2 ô) -->
+                    <div class="polaroid-style">
+                        <div class="polaroid-image"><img src="lop10/anh/su1.png" alt="Image"></div>
+                    </div>
+                    <!-- Ảnh 3 - Vuông -->
+                    <div class="polaroid-style">
+                        <div class="polaroid-image"><img src="lop10/anh/su2.png" alt="Image"></div>
+                    </div>
+                    <!-- Ảnh 4 - Vuông -->
+                    <div class="polaroid-style">
+                        <div class="polaroid-image"><img src="lop10/anh/su3.png" alt="Image"></div>
+                    </div>
+                    <!-- Ảnh 5 - Lớn ngang (chiếm 2 ô) -->
+                    <div class="polaroid-style">
+                        <div class="polaroid-image"><img src="lop10/anh/su4.png" alt="Image"></div>
+                    </div>
+                    <!-- Ảnh 6 - Lớn ngang (chiếm 2 ô) -->
+                    <div class="polaroid-style">
+                        <div class="polaroid-image"><img src="lop10/anh/su5.png" alt="Image"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>   
+    <!-- Decoration -->
+    <div class="teams-decoration"></div>
+</section>
+
+<!-- PHẦN 20: EXTENDED COLLAGE GRID - -->
+<section class="final-memory-strip-section" id="final-memory-strip-section">
+    <div class="collage-header">
+        <h2 class="collage-title">NHÌN LẠI NĂM LỚP 10 NHÉ</h2>
+    </div>
+    
+    <div class="image-strip-container">
+        <img src="lop10/anh/end1.png" alt="Kỷ niệm 1">
+        <img src="lop10/anh/end2.png" alt="Kỷ niệm 2">
+        <img src="lop10/anh/end3.png" alt="Kỷ niệm 3">
+        <img src="lop10/anh/end4.png" alt="Kỷ niệm 4">
+        <img src="lop10/anh/end5.png" alt="Kỷ niệm 5">
+        <img src="lop10/anh/end6.png" alt="Kỷ niệm 6">
+    </div>
+</section>
+<!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>VỀ CHÚNG TÔI</h3>
+                <p class="footer-desc">
+                    12A2 K28 - Nơi lưu giữ những kỷ niệm đẹp nhất của tuổi học trò. Hành trình 3 năm với biết bao niềm vui và kỷ niệm.
+                </p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>LIÊN KẾT NHANH</h3>
+                <ul class="footer-links">
+                    <li><a href="#fullscreen-image-container">Lớp 10</a></li>
+                    <li><a href="#">Lớp 11</a></li>
+                    <li><a href="#">Lớp 12</a></li>
+                    <li><a href="#">Thành Viên</a></li>
+                    <li><a href="#">Giáo Viên</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>LIÊN HỆ</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook: 12A2 - K28</a></li>
+                </ul>
+                <div style="margin-top: 15px;">
+                    <h4 style="color: white; margin: 0 0 5px 0; font-size: 14px; font-weight: 600;">Góp ý cho lớp:</h4>
+                    <textarea class="feedback-box" rows="3" placeholder="Nhập lời nhắn..."></textarea>
+                    <button class="feedback-btn">Gửi</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 - 2026 12A2 K28. All rights reserved. Made with love 💛
+        </div>
+    </footer>
+
+
+
+    <!-- Right Side Navigation Bar với mô tả chi tiết -->
+<div class="right-nav-bar">
+    <!-- Phần trăm cuộn -->
+    <div class="nav-progress" id="scrollProgress">0%</div>
+    
+    <!-- Navigation Items với mô tả -->
+    <div class="nav-item" data-section="fullscreen-image-container">
+        <i class="fas fa-home nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Đầu trang</span>
+            <span class="nav-desc">Lễ khai giảng năm học</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="quote-section">
+        <i class="fas fa-quote-right nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Slogan lớp</span>
+            <span class="nav-desc">"We are the best..."</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="polaroid-section">
+        <i class="fas fa-camera-retro nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">20/10</span>
+            <span class="nav-desc">Ngày Phụ nữ Việt Nam</span>
+        </div>
+    </div>
+    
+    
+    <div class="nav-item" data-section="journal-section">
+        <i class="fas fa-gift nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">20/11</span>
+            <span class="nav-desc">Ngày Nhà giáo Việt Nam</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="backstage-section">
+        <i class="fas fa-film nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Hậu trường</span>
+            <span class="nav-desc">Tập luyện văn nghệ</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="media-section">
+        <i class="fas fa-music nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Bài ca tôm cá</span>
+            <span class="nav-desc">Tiết mục văn nghệ</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="final-award-section">
+        <i class="fas fa-trophy nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Giải III</span>
+            <span class="nav-desc">Thành tích văn nghệ</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="thanhlich-section">
+        <i class="fas fa-crown nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Thanh lịch</span>
+            <span class="nav-desc">Cặp đôi nam thanh nữ tú</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="hau-truong-section">
+        <i class="fas fa-clock nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Deadline</span>
+            <span class="nav-desc">Hậu trường chạy deadline</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="traidinh-section">
+        <i class="fas fa-bottle-droplet nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Yakult</span>
+            <span class="nav-desc">Tham quan nhà máy</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="memory-section">
+        <i class="fas fa-store nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">AEON Mall</span>
+            <span class="nav-desc">Kỷ niệm đi chơi</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="tet-section">
+        <i class="fas fa-tree nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Cận Tết</span>
+            <span class="nav-desc">Vườn thượng uyển</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="cultural-section">
+        <i class="fas fa-venus-mars nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">8/3 & Văn hóa</span>
+            <span class="nav-desc">Lễ hội văn hóa</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="summary-section">
+        <i class="fas fa-chart-simple nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Tổng kết</span>
+            <span class="nav-desc">Hành trình 3 năm</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="club-section">
+        <i class="fas fa-users nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">CLB</span>
+            <span class="nav-desc">Câu lạc bộ</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="teams-section">
+        <i class="fas fa-futbol nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Đội tuyển</span>
+            <span class="nav-desc">Các đội tuyển</span>
+        </div>
+    </div>
+    
+    <div class="nav-item" data-section="final-memory-strip-section">
+        <i class="fas fa-images nav-icon"></i>
+        <div class="nav-content">
+            <span class="nav-title">Khoảnh khắc</span>
+            <span class="nav-desc">Nhìn lại năm lớp 10</span>
+        </div>
+    </div>
+    
+    <!-- Scroll to top button với mô tả -->
+    <div class="scroll-top-btn" id="scrollTopBtn">
+        <i class="fas fa-arrow-up"></i>
+        <div class="nav-content">
+            <span class="nav-title">Lên đầu</span>
+            <span class="nav-desc">Quay lại đầu trang</span>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- ENDING NOTIFICATION -->
+<div class="ending-notification" id="endingNotification">
+    <div class="ending-content">
+        <!-- Sparkle decorations -->
+        <div class="ending-sparkle"></div>
+        
+        <!-- Balloons -->
+        <div class="ending-balloons">
+            <div class="balloon">🎈</div>
+            <div class="balloon">🎈</div>
+            <div class="balloon">🎈</div>
+            <div class="balloon">🎈</div>
+            <div class="balloon">🎈</div>
+        </div>
+        
+        <!-- Confetti -->
+        <div class="ending-confetti">
+            <div class="confetti-piece"></div>
+            <div class="confetti-piece"></div>
+            <div class="confetti-piece"></div>
+            <div class="confetti-piece"></div>
+        </div>
+        
+        <!-- Emoji -->
+        <div class="ending-emoji">🎉✨🎊</div>
+        
+        <!-- Title -->
+        <div class="ending-title">
+            KẾT THÚC <span>HÀNH TRÌNH</span>
+        </div>
+        
+        <!-- Main text -->
+        <div class="ending-text-line1">Đó là năm lớp 10 của</div>
+        <div class="ending-text-line2">OIZOICON đó</div>
+        
+        <!-- Close button -->
+        <button class="ending-close-btn" id="endingCloseBtn">
+            <i class="fas fa-heart" style="margin-right: 8px;"></i>
+            Xem lại kỷ niệm
+        </button>
+    </div>
+</div>
+
+</body>
+</html>
